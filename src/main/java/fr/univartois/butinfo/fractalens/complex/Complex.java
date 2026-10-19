@@ -50,8 +50,7 @@ public class Complex implements IComplex
 
     @Override
     public IComplex multiply(double value) {
-
-        return null;
+        return new Complex(real * value, imaginary * value);
     }
 
     @Override

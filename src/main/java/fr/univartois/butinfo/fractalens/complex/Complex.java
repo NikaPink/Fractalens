@@ -25,7 +25,7 @@ public class Complex implements IComplex
     @Override
     public double abs() {
 
-        return 0;
+        return Math.pow((real*real)+(imaginary*imaginary),0.5);
     }
 
     @Override

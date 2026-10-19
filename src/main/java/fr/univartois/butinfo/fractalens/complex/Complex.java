@@ -55,8 +55,7 @@ public class Complex implements IComplex
 
     @Override
     public IComplex multiply(IComplex other) {
-
-        return null;
+        return new Complex(real*other.getRealPart() - imaginary* other.getImaginaryPart(), real*other.getImaginaryPart() + imaginary*other.getImaginaryPart() + imaginary*other.getRealPart()* other.getRealPart());
     }
 
     @Override

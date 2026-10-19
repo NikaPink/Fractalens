@@ -36,7 +36,7 @@ public class Complex implements IComplex
     @Override
     public IComplex conjugate() {
 
-        return null;
+        return new Complex(real, -imaginary);
     }
 
     @Override

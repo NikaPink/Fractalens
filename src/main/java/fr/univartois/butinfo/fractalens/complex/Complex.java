@@ -30,8 +30,7 @@ public class Complex implements IComplex
 
     @Override
     public IComplex negate() {
-
-        return null;
+        return new Complex(-real, -imaginary);
     }
 
     @Override

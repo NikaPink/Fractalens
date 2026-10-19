@@ -24,7 +24,7 @@ public class ComplexSequence implements IComplexSequence{
 
     @Override
     public Iterator<IComplex> iterator() {
-        return new PathComplexSequence(this,max,z0);
+        return new PathComplexSequenceIterator(this,max,z0);
     }
 
 

@@ -35,14 +35,12 @@ public class Complex implements IComplex
 
     @Override
     public IComplex conjugate() {
-
         return new Complex(real, -imaginary);
     }
 
     @Override
     public IComplex add(IComplex other) {
-
-        return null;
+        return new Complex(real + other.getRealPart(), imaginary + other.getImaginaryPart());
     }
 
     @Override

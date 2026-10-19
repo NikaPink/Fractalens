@@ -11,8 +11,8 @@ public class PathComplexSequence implements Iterator<IComplex> {
     private IComplex current;
     private int count;
 
-    public PathComplexSequence(IComplexSequence sequence, int maxIterations) {
-
+    public PathComplexSequence(IComplexSequence sequence, int maxIterations,IComplex prem) {
+        this.current=prem;
         this.sequence = sequence;
         this.maxIterations = maxIterations;
     }

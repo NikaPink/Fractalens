@@ -45,8 +45,7 @@ public class Complex implements IComplex
 
     @Override
     public IComplex subtract(IComplex other) {
-
-        return null;
+        return new Complex(real - other.getRealPart(), imaginary - other.getImaginaryPart());
     }
 
     @Override

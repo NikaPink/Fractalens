@@ -60,8 +60,9 @@ public class Complex implements IComplex
 
     @Override
     public IComplex divide(IComplex other) {
-
-        return null;
+        double denominator = other.getImaginaryPart()* other.getImaginaryPart() + other.getRealPart()* other.getRealPart();
+        IComplex numerator = multiply(other.conjugate());
+        return new Complex(numerator.getRealPart()/denominator, numerator.getImaginaryPart()/denominator);
     }
 
 }

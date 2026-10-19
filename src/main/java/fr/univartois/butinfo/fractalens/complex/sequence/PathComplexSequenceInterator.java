@@ -5,13 +5,13 @@ import fr.univartois.butinfo.fractalens.complex.IComplex;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class PathComplexSequence implements Iterator<IComplex> {
+public class PathComplexSequenceInterator implements Iterator<IComplex> {
     private final IComplexSequence sequence;
     private final int maxIterations;
     private IComplex current;
     private int count;
 
-    public PathComplexSequence(IComplexSequence sequence, int maxIterations) {
+    public PathComplexSequenceInterator(IComplexSequence sequence, int maxIterations) {
 
         this.sequence = sequence;
         this.maxIterations = maxIterations;

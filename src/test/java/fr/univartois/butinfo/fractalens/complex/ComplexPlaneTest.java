@@ -61,7 +61,7 @@ class ComplexPlaneTest {
      */
     private static IComplexPlane createPlane(int height, int width) {
         // TODO Create here an instance of your class implementing IComplexPlane.
-        return null;
+        return new ComplexPlane(height,width);
     }
 
     /**

@@ -1,7 +1,9 @@
 package fr.univartois.butinfo.fractalens.image;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class BufferedImageAdapter implements IFractalImage {
@@ -29,7 +31,7 @@ public class BufferedImageAdapter implements IFractalImage {
 
     @Override
     public void saveAs(String path) throws IOException {
-
+        File file = new File(path);
+        ImageIO.write(image,"fractale_",file);
     }
-
 }

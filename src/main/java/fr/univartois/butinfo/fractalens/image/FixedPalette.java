@@ -33,7 +33,7 @@ public class FixedPalette implements IPalette {
             return colors.get(0);
         }
         if (iterationNumber >= colors.size()) {
-            return colors.get(colors.size() - 1);
+            return colors.get(iterationNumber%colors.size());
         }
         return colors.get(iterationNumber);
     }

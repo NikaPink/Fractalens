@@ -3,6 +3,7 @@ package fr.univartois.butinfo.fractalens.generator;
 import fr.univartois.butinfo.fractalens.complex.IComplex;
 import fr.univartois.butinfo.fractalens.complex.IComplexPlane;
 import fr.univartois.butinfo.fractalens.complex.sequence.IComplexSequence;
+import fr.univartois.butinfo.fractalens.image.BufferedImageAdapter;
 import fr.univartois.butinfo.fractalens.image.IFractalImage;
 import fr.univartois.butinfo.fractalens.image.IPalette;
 
@@ -35,15 +36,15 @@ public class FractalGenerator implements IFractalGenerator {
 
     /**
      * Constructor.
-     * @param image
+     *
      * @param plane
      * @param palette
      * @param sequence
      * @param maxIterations
      * @param path
      */
-    public FractalGenerator(IFractalImage image, IComplexPlane plane, IPalette palette, BiFunction<IComplex,Integer, IComplexSequence> sequence, int maxIterations, String path) {
-        this.image = image;
+    public FractalGenerator( IComplexPlane plane, IPalette palette, BiFunction<IComplex,Integer, IComplexSequence> sequence, int maxIterations, String path) {
+        this.image = new BufferedImageAdapter(800,600);
         this.plane = plane;
         this.palette = palette;
         this.sequence = sequence;

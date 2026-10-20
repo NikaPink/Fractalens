@@ -14,14 +14,13 @@ public class  Main {
 
         ComplexPlane plan = new ComplexPlane(600, 800);
         IPalette palette = new GreyPalette(maxIterations);
-        BufferedImageAdapter image = new BufferedImageAdapter(800,600);
         ZoomableComplexPlane planZoom = new ZoomableComplexPlane(plan, 0.004);
 
         BiFunction<IComplex, Integer, IComplexSequence> sequenceFactory =
                 (z0, maxIter) -> new ComplexSequence(z0, new Complex(-0.4, 0.6), maxIter);
 
 
-        FractalGenerator generator = new FractalGenerator(image,planZoom,palette,sequenceFactory,maxIterations,"julia.png");
+        FractalGenerator generator = new FractalGenerator(planZoom,palette,sequenceFactory,maxIterations,"julia.png");
         generator.generateImage();
         generator.saveImage();
     }

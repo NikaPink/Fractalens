@@ -11,17 +11,20 @@ public class Main {
     public static void main(String[] args) {
 
         int maxIterations = 100;
-
-        ComplexPlane plan = new ComplexPlane(600, 800);
-        IPalette palette = new GreyPalette(maxIterations);
         BufferedImageAdapter image = new BufferedImageAdapter(800,600);
+
+        //création du plan zoomé et déplacé
+        ComplexPlane plan = new ComplexPlane(600, 800);
         ZoomableComplexPlane planZoom = new ZoomableComplexPlane(plan, 0.004);
+        //TODO : mettre le plan déplacé
+
+        IPalette palette = new GreyPalette(maxIterations);
 
         BiFunction<IComplex, Integer, IComplexSequence> sequenceFactory =
                 (z0, maxIter) -> new ComplexSequence(z0, new Complex(-0.4, 0.6), maxIter);
-
-
         FractalGenerator generator = new FractalGenerator(image,planZoom,palette,sequenceFactory,maxIterations,"julia.png");
+
+        //génération de la fractale et sauvegarde
         generator.generateImage();
         generator.saveImage();
     }

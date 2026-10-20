@@ -30,7 +30,7 @@ class FractalImageAdapterTest {
      * @return The created fractal image.
      */
     private static IFractalImage createImage(BufferedImage image) {
-        return new BufferedImageAdapter(image.getWidth(), image.getHeight());
+        return new BufferedImageAdapter(image);
     }
 
     /**

@@ -10,6 +10,10 @@ public class BufferedImageAdapter implements IFractalImage {
 
     private BufferedImage image;
 
+    public BufferedImageAdapter(BufferedImage image) {
+        this.image = image;
+    }
+
     public BufferedImageAdapter(int width, int height) {
         image  = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
     }
@@ -26,12 +30,12 @@ public class BufferedImageAdapter implements IFractalImage {
 
     @Override
     public void setColor(int row, int column, Color color) {
-        image.setRGB(row, column, color.getRGB());
+        image.setRGB(column, row, color.getRGB());
     }
 
     @Override
     public void saveAs(String path) throws IOException {
         File file = new File(path);
-        ImageIO.write(image,"fractale_",file);
+        ImageIO.write(image,"png",file);
     }
 }

@@ -6,7 +6,6 @@ import java.util.Iterator;
 
 public class ComplexSequence implements IComplexSequence{
     IComplex c;
-    Iterator<IComplex> i;
     IComplex z0;
     int max;
 
@@ -14,7 +13,7 @@ public class ComplexSequence implements IComplexSequence{
         this.c=c;
         z0=prem;
         max=nbmax;
-        i=iterator();
+        iterator();
     }
     @Override
     public IComplex computeNext(IComplex previous) {

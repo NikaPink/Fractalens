@@ -2,16 +2,16 @@ package fr.univartois.butinfo.fractalens.complex;
 
 public class ZoomableComplexPlane implements IComplexPlane {
 
-    /** Le plan complexe d'origine décoré */
+    /** The original complex plane, decorated */
     private final IComplexPlane plane;
 
-    /** Le facteur d'échelle appliqué au plan */
+    /** The scale factor applied to the plan */
     private final double zoomFactor;
 
     /**
-     * Construit un plan complexe zoomable à partir d'un plan existant
-     * @param plane Le plan complexe de base à décorer
-     * @param zoomFactor Le facteur de zoom à appliquer aux nombres complexes
+     * Constructs a zoomable complex plane from an existing plane
+     * @param plane The base complex plane to be decorated
+     * @param zoomFactor The zoom factor to apply to the complex numbers
      */
     public ZoomableComplexPlane(IComplexPlane plane, double zoomFactor) {
         this.plane = plane;
@@ -19,10 +19,10 @@ public class ZoomableComplexPlane implements IComplexPlane {
     }
 
     /**
-     * Obteint le nombre complexe du plan d'origine et le multiplie par le facteur de zoom
-     * @param row La ligne du pixel dans l'image
-     * @param column La colonne du pixel dans l'image
-     * @return Le nombre complexe correspondant au pixel, ajusté avec le zoom
+     * Obtains the complex number from the original plane and multiplies it by the zoom factor
+     * @param row The row of the pixel in the image
+     * @param column The column of the pixel in the image
+     * @return The complex number corresponding to the pixel, adjusted by the zoom
      */
     @Override
     public IComplex asComplex(int row, int column) {

@@ -25,8 +25,7 @@ public class Main {
                 (z0, maxIter) -> new ComplexSequence(z0, new Complex(-0.4, 0.6), maxIter);
 
         //génération de la fractale et sauvegarde
-
-        FractalGenerator generator = new FractalGenerator(planZoom,palette,sequenceFactory,maxIterations,"julia.png");
+        FractalGenerator generator = new FractalGenerator(translatePlan,palette,sequenceFactory,maxIterations,"julia.png");
         generator.generateImage();
         generator.saveImage();
     }

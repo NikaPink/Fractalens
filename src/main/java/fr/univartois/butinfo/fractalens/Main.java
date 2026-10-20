@@ -13,7 +13,7 @@ public class Main {
         int maxIterations = 100;
 
         ComplexPlane plan = new ComplexPlane(600, 800);
-        IPalette palette = new GreyPalette();
+        IPalette palette = new GreyPalette(maxIterations);
         BufferedImageAdapter image = new BufferedImageAdapter(800,600);
         ZoomableComplexPlane planZoom = new ZoomableComplexPlane(plan, 0.004);
 

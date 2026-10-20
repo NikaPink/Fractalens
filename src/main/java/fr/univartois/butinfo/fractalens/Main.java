@@ -11,6 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
         int maxIterations = 100;
+        Complex c = new Complex(-0.4, 0.6);
         double zoomFactor = 1.0;
         Complex translation = new Complex(0, 0);
 
@@ -22,7 +23,7 @@ public class Main {
         IPalette palette = new GreyPalette(maxIterations);
 
         BiFunction<IComplex, Integer, IComplexSequence> sequenceFactory =
-                (z0, maxIter) -> new ComplexSequence(z0, new Complex(-0.4, 0.6), maxIter);
+                (z0, maxIter) -> new ComplexSequence(z0, c, maxIter);
 
         //génération de la fractale et sauvegarde
         FractalGenerator generator = new FractalGenerator(translatePlan,palette,sequenceFactory,maxIterations,"julia.png");

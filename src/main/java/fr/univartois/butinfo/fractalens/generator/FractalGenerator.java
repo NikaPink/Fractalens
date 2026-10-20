@@ -80,7 +80,7 @@ public class FractalGenerator implements IFractalGenerator {
         for (IComplex z : seq) {
             iterations++;
         }
-        return palette.getColor(iterations, maxIterations);
+        return palette.getColor(iterations);
     }
 
     /**

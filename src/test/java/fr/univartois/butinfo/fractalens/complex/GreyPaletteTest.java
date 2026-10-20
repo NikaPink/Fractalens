@@ -12,12 +12,12 @@ public class GreyPaletteTest {
 
     @Test
     void TestGreyPalette(){
-        GreyPalette p = new GreyPalette();
+        GreyPalette p = new GreyPalette(50);
         float n=0;
-        assertEquals(new Color(n,n,n), p.getColor(50,50));
+        assertEquals(new Color(n,n,n), p.getColor(50));
         n= (float)1/2;
-        assertEquals(new Color(n,n,n), p.getColor(25,50));
+        assertEquals(new Color(n,n,n), p.getColor(25));
         n=(float)0.4;
-        assertEquals(new Color(n,n,n), p.getColor(6,10));
+        assertEquals(new Color(n,n,n), p.getColor(30));
     }
 }

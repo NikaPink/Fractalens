@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  * The ComplementaryPaletteTest tests the decorator of {@link IPalette} returning
  * complementary colors.
  */
-class ComplementaryPaletteTest {
+class ComplementaryColorTest {
 
     /**
      * Test method for

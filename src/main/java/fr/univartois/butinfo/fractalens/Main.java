@@ -23,9 +23,10 @@ public class Main {
 
         BiFunction<IComplex, Integer, IComplexSequence> sequenceFactory =
                 (z0, maxIter) -> new ComplexSequence(z0, new Complex(-0.4, 0.6), maxIter);
-        FractalGenerator generator = new FractalGenerator(planZoom,palette,sequenceFactory,maxIterations,"julia.png");
 
         //génération de la fractale et sauvegarde
+
+        FractalGenerator generator = new FractalGenerator(planZoom,palette,sequenceFactory,maxIterations,"julia.png");
         generator.generateImage();
         generator.saveImage();
     }

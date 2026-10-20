@@ -42,7 +42,7 @@ public class FractalGenerator implements IFractalGenerator {
      * @param maxIterations
      * @param path
      */
-    public FractalGenerator(IFractalImage image,IComplexPlane plane, IPalette palette, BiFunction<IComplex,Integer, IComplexSequence> sequence, int maxIterations, String path) {
+    public FractalGenerator(IFractalImage image, IComplexPlane plane, IPalette palette, BiFunction<IComplex,Integer, IComplexSequence> sequence, int maxIterations, String path) {
         this.image = image;
         this.plane = plane;
         this.palette = palette;

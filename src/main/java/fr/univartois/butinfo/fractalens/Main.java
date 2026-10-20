@@ -7,7 +7,7 @@ import fr.univartois.butinfo.fractalens.image.*;
 
 import java.util.function.BiFunction;
 
-public class Main {
+public class  Main {
     public static void main(String[] args) {
 
         int maxIterations = 100;

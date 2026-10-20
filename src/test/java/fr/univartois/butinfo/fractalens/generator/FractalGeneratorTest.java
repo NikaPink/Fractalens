@@ -32,10 +32,11 @@ class FractalGeneratorTest {
      */
     private static IFractalGenerator createGenerator(IFractalImage image, String path) {
         IComplex c = new Complex(0, 0);
-        IPalette palette = (max) -> (Color.getColor(n) == 0) ? Color.BLACK : Color.WHITE;
+        int maxIterations = 50;
+        IPalette palette = n -> (n == maxIterations) ? Color.BLACK : Color.WHITE;
         return new FractalGenerator(image,
                 new ComplexPlane(image.getHeight(), image.getWidth()), palette,
-                (z0, nbTerms) -> new ComplexSequence(z0, c, nbTerms), 50, path);
+                (z0, nbTerms) -> new ComplexSequence(z0, c, nbTerms), maxIterations, path);
     }
 
     /**

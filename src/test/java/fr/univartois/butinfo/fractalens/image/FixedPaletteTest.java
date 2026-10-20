@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,17 +26,16 @@ class FixedPaletteTest {
 
     @BeforeEach
     void setUp() {
-        // Initialisation d'une liste de 3 couleurs de test
         sampleColors = List.of(
-                Color.RED,   // Index 0
-                Color.GREEN, // Index 1
-                Color.BLUE   // Index 2
+                Color.RED,
+                Color.GREEN,
+                Color.BLUE
         );
         palette = new FixedPalette(sampleColors);
     }
 
     @Test
-    @DisplayName("getColor should not return null for valid instances")
+    @DisplayName("getColor should not return null")
     void testGetColorNotNull() {
         assertNotNull(palette.getColor(0));
     }
@@ -48,17 +48,24 @@ class FixedPaletteTest {
     }
 
     @Test
-    @DisplayName("getColor should return the exact color corresponding to the given iteration index")
-    void testGetColorValidIntermediateIndex() {
+    @DisplayName("getColor should return exact color for indices inside list boundaries")
+    void testGetColorInBounds() {
         assertEquals(sampleColors.get(0), palette.getColor(0));
         assertEquals(sampleColors.get(1), palette.getColor(1));
         assertEquals(sampleColors.get(2), palette.getColor(2));
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {3, 4, 10, 100})
-    @DisplayName("getColor should return the last color when iteration count >= colors.size()")
-    void testGetColorExceedsListSize(int iteration) {
-        assertEquals(sampleColors.get(sampleColors.size() - 1), palette.getColor(iteration));
+    @CsvSource({
+            "3, 0",
+            "4, 1",
+            "5, 2",
+            "6, 0",
+            "10, 1"
+    })
+    @DisplayName("getColor should cycle through colors using modulo when iteration >= colors.size()")
+    void testGetColorModuloCycle(int iterationNumber, int expectedIndex) {
+        Color expectedColor = sampleColors.get(expectedIndex);
+        assertEquals(expectedColor, palette.getColor(iterationNumber));
     }
 }

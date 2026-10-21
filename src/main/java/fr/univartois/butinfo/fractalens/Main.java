@@ -46,7 +46,7 @@ public class Main {
         IPalette palette = new GradientPalette(c1,c2,maxIterations);
 
         BiFunction<IComplex, Integer, IComplexSequence> sequenceFactory =
-                (z0, maxIter) -> new ComplexSequence(z0, c, maxIter);
+                (z0, maxIter) -> new ComplexJuliaSequence(z0, c, maxIter);
 
         //génération de la fractale et sauvegarde
         FractalGenerator generator = new FractalGenerator(translatePlan,palette,sequenceFactory,maxIterations,"fractale_1.png");
@@ -65,12 +65,14 @@ public class Main {
         ZoomableComplexPlane planZoom = new ZoomableComplexPlane(plan, zoomFactor);
         TranslationComplexPlane translatePlan = new TranslationComplexPlane(planZoom,translation);
 
-        IPalette palette = new FixedPalette(cosmicPalette);
+        IPalette palette = new GradientPalette(new Color(180,57,12),new Color(4,7,58),maxIterations);
+
+        //IPalette paletteInv= new MaskPalette(palette,true,true,false);
 
         IPalette paletteInv = new ComplementaryColor(palette);
 
         BiFunction<IComplex, Integer, IComplexSequence> sequenceFactory =
-                (z0, maxIter) -> new ComplexSequence(z0, c, maxIter);
+                (z0, maxIter) -> new ComplexJuliaSequence(z0, c, maxIter);
 
         //génération de la fractale et sauvegarde
         FractalGenerator generator = new FractalGenerator(translatePlan,paletteInv,sequenceFactory,maxIterations,"fractale_2.png");

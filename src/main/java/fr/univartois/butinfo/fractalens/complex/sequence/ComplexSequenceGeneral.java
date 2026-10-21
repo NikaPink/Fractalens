@@ -40,4 +40,16 @@ public class ComplexSequenceGeneral implements IComplexSequence {
                 );
     }
 
+    public static ComplexSequenceGeneral burningShipGeneralized(IComplex z0, int maxIteration,int p){
+        return new ComplexSequenceGeneral(z0,maxIteration,(IComplex initial,IComplex prev) -> {
+            double real = Math.abs(prev.getRealPart());
+            double imaginary = Math.abs(prev.getImaginaryPart());
+
+            IComplex absComplex = new Complex(real, imaginary);
+
+            return absComplex.pow(p).add(z0);
+        }
+        );
+    }
+
 }

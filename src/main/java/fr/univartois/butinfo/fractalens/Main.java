@@ -103,7 +103,7 @@ public class Main {
 
     public static void burningShipFractale() {
         int maxIterations = 64;
-        double zoomFactor = 0.0001;
+        double zoomFactor = 0.00013;
         Complex c = new Complex(-0.4, 0.6);
         Complex translation = new Complex(-1.755, -0.03);
 

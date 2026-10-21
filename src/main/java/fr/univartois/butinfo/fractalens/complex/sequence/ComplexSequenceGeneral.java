@@ -28,16 +28,23 @@ public class ComplexSequenceGeneral implements IComplexSequence {
         return new PathComplexSequenceIterator(this,max,z0);
     }
 
-    public static ComplexSequenceGeneral burningShip(IComplex z0, int maxIteration){
-        return new ComplexSequenceGeneral(z0,maxIteration,(IComplex initial,IComplex prev) -> {
-            double real = Math.abs(prev.getRealPart());
-            double imaginary = Math.abs(prev.getImaginaryPart());
-
-            IComplex absComplex = new Complex(real, imaginary);
-
-            return absComplex.multiply(absComplex).add(z0);
-        }
-                );
+    /**
+     * Creates a sequence for the Burning Ship fractal: z(n+1) = (|Re(z_n)| +
+     * i|Im(z_n)|)^2 + c, starting from z0.
+     *
+     * @param z0 The first term of the sequence (usually the pixel).
+     * @param c The constant number of the sequence.
+     * @param maxIteration The maximum number of iterations.
+     *
+     * @return The created Burning Ship sequence.
+     */
+    public static ComplexSequenceGeneral burningShip(IComplex z0, IComplex c, int maxIteration) {
+        return new ComplexSequenceGeneral(z0, maxIteration, (initial, prev) -> {
+            IComplex absComplex = new Complex(
+                    Math.abs(prev.getRealPart()),
+                    Math.abs(prev.getImaginaryPart()));
+            return absComplex.multiply(absComplex).add(c);
+        });
     }
 
 }

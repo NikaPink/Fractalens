@@ -26,7 +26,6 @@ public class Complex implements IComplex
 
     @Override
     public double abs() {
-
         return Math.pow((real*real)+(imaginary*imaginary),0.5);
     }
 
@@ -92,6 +91,7 @@ public class Complex implements IComplex
         return Objects.hash(real, imaginary);
     }
 
+    @Override
     public IComplex pow(int p) {
         if (p == 0) {
             return new Complex(1, 0);

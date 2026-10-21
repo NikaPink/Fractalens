@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import javax.imageio.ImageIO;
 
 /**
@@ -84,6 +85,9 @@ public class BufferedImageAdapter implements IFractalImage {
     @Override
     public void saveAs(String path) throws IOException {
         File file = new File(path);
-        ImageIO.write(image, "png", file);
+        String[] str = path.split("\\.");
+        String extension = str[str.length - 1];
+
+        ImageIO.write(image, extension, file);
     }
 }

@@ -67,8 +67,6 @@ public class Main {
 
         IPalette palette = new GradientPalette(new Color(180,57,12),new Color(4,7,58),maxIterations);
 
-        //IPalette paletteInv= new MaskPalette(palette,true,true,false);
-
         IPalette paletteInv = new ComplementaryColor(palette);
 
         BiFunction<IComplex, Integer, IComplexSequence> sequenceFactory =
@@ -80,10 +78,58 @@ public class Main {
         generator.saveImage();
     }
 
+    public static void mandelbrotFractale() {
+        int maxIterations = 250;
+        double zoomFactor = 0.004;
+        Complex translation = new Complex(-0.75, 0);
+
+        // Plan 600 x 800, zoomé puis déplacé
+        ComplexPlane plan = new ComplexPlane(600, 800);
+        ZoomableComplexPlane planZoom = new ZoomableComplexPlane(plan, zoomFactor);
+        TranslationComplexPlane translatePlan = new TranslationComplexPlane(planZoom, translation);
+
+        IPalette palette = new GradientPalette(new Color(48, 95, 40), new Color(210, 175, 255), maxIterations);
+
+        // Mandelbrot réalisé avec ComplexJuliaSequence en inversant les rôles : z0 = 0 et c = le pixel.
+        BiFunction<IComplex, Integer, IComplexSequence> sequenceFactory =
+                (pixel, maxIter) -> new ComplexJuliaSequence(new Complex(0, 0), pixel, maxIter);
+
+        // Sauvegarde sous fractale_3.png
+        FractalGenerator generator = new FractalGenerator(
+                translatePlan, palette, sequenceFactory, maxIterations, "fractale_3.png");
+        generator.generateImage();
+        generator.saveImage();
+    }
+
+    public static void burningShipFractale() {
+        int maxIterations = 64;
+        double zoomFactor = 0.00013;
+        Complex c = new Complex(-0.4, 0.6);
+        Complex translation = new Complex(-1.755, -0.03);
+
+        // Plan 800 x 800, zoomé puis déplacé
+        ComplexPlane plan = new ComplexPlane(800, 800);
+        ZoomableComplexPlane planZoom = new ZoomableComplexPlane(plan, zoomFactor);
+        TranslationComplexPlane translatePlan = new TranslationComplexPlane(planZoom, translation);
+
+        IPalette palette = new GradientPalette(new Color(0, 0, 0), new Color(255, 140, 0), maxIterations);
+
+        // Suite Burning Ship via la factory de ComplexSequenceGeneral :
+        // z(n+1) = (|Re(z_n)| + i|Im(z_n)|)^2 + c
+        BiFunction<IComplex, Integer, IComplexSequence> sequenceFactory =
+                (pixel, maxIter) -> ComplexSequenceGeneral.burningShip(pixel, c, maxIter);
+
+        // Sauvegarde sous fractale_4.png
+        FractalGenerator generator = new FractalGenerator(
+                translatePlan, palette, sequenceFactory, maxIterations, "fractale_4.png");
+        generator.generateImage();
+        generator.saveImage();
+    }
 
     public static void main(String[] args) {
         firstFractale();
         secondFractale();
-
+        mandelbrotFractale();
+        burningShipFractale();
     }
 }

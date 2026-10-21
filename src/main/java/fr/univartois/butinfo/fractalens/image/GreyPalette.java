@@ -3,7 +3,7 @@ package fr.univartois.butinfo.fractalens.image;
 import java.awt.*;
 
 public class GreyPalette implements IPalette{
-    int maxIteration;
+    private int maxIteration;
 
     public GreyPalette(int maxIteration){
         this.maxIteration=maxIteration;

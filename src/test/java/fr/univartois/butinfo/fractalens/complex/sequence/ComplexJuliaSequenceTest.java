@@ -39,7 +39,7 @@ import fr.univartois.butinfo.fractalens.complex.IComplex;
  *
  * @version 0.1.0
  */
-class ComplexSequenceTest {
+class ComplexJuliaSequenceTest {
 
     /**
      * Creates a new complex number.
@@ -68,7 +68,7 @@ class ComplexSequenceTest {
             IComplex first, IComplex constant, int nbTerms) {
         // TODO Create here an instance of your class implementing IComplexSequence for
         // Julia's sequence.
-        return new ComplexSequence(first,constant,nbTerms);
+        return new ComplexJuliaSequence(first,constant,nbTerms);
     }
 
     /**

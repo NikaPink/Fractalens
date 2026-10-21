@@ -174,5 +174,61 @@ class ComplexSequenceGeneralTest {
         assertEquals(-11.0, result.getRealPart(), 0.0001);
         assertEquals(2.0, result.getImaginaryPart(), 0.0001);
     }
+
+    /**
+     * Test method for the static burningShip sequence generator.
+     */
+    @Test
+    void testBurningShipStaticMethod() {
+        IComplex z0 = createComplex(0.1, 0.1);
+        Complex c = new Complex(0, 0); // Paramètre c présent dans la signature mais la formule utilise z0
+
+        ComplexSequenceGeneral sequence = ComplexSequenceGeneral.burningShip(z0, c, 50);
+
+        // prev = -2 + 3i
+        // 1. Valeur absolue : |-2| + i|3| = 2 + 3i
+        // 2. Puissance 2   : (2 + 3i)^2 = 4 - 9 + 12i = -5 + 12i
+        // 3. Ajout de z0   : (-5 + 12i) + (0.1 + 0.1i) = -4.9 + 12.1i
+        IComplex previous = createComplex(-2.0, 3.0);
+        IComplex next = sequence.computeNext(previous);
+
+        assertEquals(-4.9, next.getRealPart(), 0.001);
+        assertEquals(12.1, next.getImaginaryPart(), 0.001);
+    }
+
+    /**
+     * Test method for the Black Snowflake sequence.
+     */
+    @Test
+    void testBlackSnowFlake() {
+        IComplex z0 = createComplex(0.5, 0.5);
+        ComplexSequenceGeneral sequence = ComplexSequenceGeneral.blackSnowFlake(z0, 50);
+
+        // prev = 1 + 1i
+        // 1. prev^2 = (1 + 1i)^2 = 1 - 1 + 2i = 0 + 2i
+        // 2. prev^4 = (2i)^2 = -4 + 0i
+        // 3. prev^4 + prev^2 + z0 = -4 + 2i + 0.5 + 0.5i = -3.5 + 2.5i
+        IComplex previous = createComplex(1.0, 1.0);
+        IComplex next = sequence.computeNext(previous);
+
+        assertEquals(-3.5, next.getRealPart(), 0.001);
+        assertEquals(2.5, next.getImaginaryPart(), 0.001);
+    }
+
+    /**
+     * Test method to check edge cases like origin (0, 0) for Black Snowflake.
+     */
+    @Test
+    void testBlackSnowFlakeWithOrigin() {
+        IComplex z0 = createComplex(1.0, -1.0);
+        ComplexSequenceGeneral sequence = ComplexSequenceGeneral.blackSnowFlake(z0, 50);
+
+        IComplex previous = createComplex(0.0, 0.0);
+        IComplex next = sequence.computeNext(previous);
+
+        // 0^4 + 0^2 + z0 = z0
+        assertEquals(1.0, next.getRealPart(), 0.001);
+        assertEquals(-1.0, next.getImaginaryPart(), 0.001);
+    }
 }
 

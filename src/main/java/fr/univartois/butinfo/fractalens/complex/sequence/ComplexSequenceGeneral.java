@@ -115,6 +115,16 @@ public class ComplexSequenceGeneral implements IComplexSequence {
         );
     }
 
+
+    /**
+     * Creates a Black Snowflake sequence.
+     * The sequence is defined by the formula: z_{n+1} = z_n^4 + z_n^2 + z_0.
+     *
+     * @param z0 The initial term of the sequence.
+     * @param maxIteration The maximum number of iterations.
+     *
+     * @return A new instance of ComplexSequenceGeneral configured for the Black Snowflake fractal.
+     */
     public static ComplexSequenceGeneral blackSnowFlake(IComplex z0, int maxIteration){
         return new ComplexSequenceGeneral(z0,maxIteration,(IComplex initial,IComplex prev) -> {
             IComplex complex = new Complex(prev.getRealPart(), prev.getImaginaryPart());

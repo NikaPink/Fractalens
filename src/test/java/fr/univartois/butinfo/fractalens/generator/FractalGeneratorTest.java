@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 import fr.univartois.butinfo.fractalens.complex.Complex;
 import fr.univartois.butinfo.fractalens.complex.ComplexPlane;
 import fr.univartois.butinfo.fractalens.complex.IComplex;
-import fr.univartois.butinfo.fractalens.complex.sequence.ComplexSequence;
+import fr.univartois.butinfo.fractalens.complex.sequence.ComplexJuliaSequence;
 import fr.univartois.butinfo.fractalens.image.IPalette;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -36,7 +36,7 @@ class FractalGeneratorTest {
         int maxIterations = 50;
         IPalette palette = n -> (n == maxIterations) ? Color.BLACK : Color.WHITE;
         return new FractalGenerator(new ComplexPlane(600, 800), palette,
-                (z0, nbTerms) -> new ComplexSequence(z0, c, nbTerms), maxIterations, path);
+                (z0, nbTerms) -> new ComplexJuliaSequence(z0, c, nbTerms), maxIterations, path);
     }
 
     /**

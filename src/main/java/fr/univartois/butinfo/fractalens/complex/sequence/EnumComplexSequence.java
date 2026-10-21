@@ -12,10 +12,18 @@ public enum EnumComplexSequence {
      */
     JULIA(c -> (z0, maxIterations) -> new ComplexJuliaSequence(z0, c, maxIterations)),
 
+    JULIA_GENERALIZED_3(c -> (z0, maxIterations) -> new ComplexSequenceJuliaGeneralized(z0, c, maxIterations, 3)),
+
+    JULIA_GENERALIZED_5(c -> (z0, maxIterations) -> new ComplexSequenceJuliaGeneralized(z0, c, maxIterations, 5)),
+
     /**
      * Represents the Mandelbrot sequence.
      */
     MANDELBROT(c -> (z0, maxIterations) -> new ComplexSequenceMandelbrot(z0, maxIterations)),
+
+    MANDELBROT_GENERALIZED_3(c -> (z0, maxIterations) -> new ComplexSequenceMandelbrotGeneralized(z0, maxIterations, 3)),
+
+    MANDELBROT_GENERALIZED_5(c -> (z0, maxIterations) -> new ComplexSequenceMandelbrotGeneralized(z0, maxIterations, 5)),
 
     /**
      * Represents the Tricorn (or Mandelbar) sequence.

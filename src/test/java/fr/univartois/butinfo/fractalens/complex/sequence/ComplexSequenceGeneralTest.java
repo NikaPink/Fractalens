@@ -100,5 +100,21 @@ class ComplexSequenceGeneralTest {
 
         assertNotNull(iterator, "The iterator should not be null.");
     }
+
+    /**
+     * Test method for the generalized Burning Ship sequence.
+     */
+    @Test
+    void testComputeNextWithGeneralizedBurningShip() {
+        IComplex z0 = createComplex(0.5, -0.5);
+        int p = 3;
+
+        ComplexSequenceGeneral sequence = ComplexSequenceGeneral.burningShipGeneralized(z0, 100, p);
+        IComplex previous = createComplex(-1.0, 2.0);
+        IComplex next = sequence.computeNext(previous);
+
+        assertEquals(-10.5, next.getRealPart(), 0.001);
+        assertEquals(-2.5, next.getImaginaryPart(), 0.001);
+    }
 }
 

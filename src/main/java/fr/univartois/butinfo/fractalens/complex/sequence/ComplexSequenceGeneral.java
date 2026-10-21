@@ -67,15 +67,17 @@ public class ComplexSequenceGeneral implements IComplexSequence {
     }
 
     /**
-     * Creates a Burning Ship sequence.
-     * The sequence is defined by the formula: z_{n+1} = (|Re(z_n)| + i|Im(z_n)|)^2 + z_0.
+     * Creates a Burning Ship sequence. The sequence is defined by the formula:
+     * z_{n+1} = (|Re(z_n)| + i|Im(z_n)|)^2 + z_0.
      *
      * @param z0 The initial term of the sequence.
+     * @param c
      * @param maxIteration The maximum number of iterations.
      *
-     * @return A new instance of ComplexSequenceGeneral configured for the Burning Ship fractal.
+     * @return A new instance of ComplexSequenceGeneral configured for the
+     * Burning Ship fractal.
      */
-    public static ComplexSequenceGeneral burningShip(IComplex z0, int maxIteration) {
+    public static ComplexSequenceGeneral burningShip(IComplex z0, Complex c, int maxIteration) {
         return new ComplexSequenceGeneral(
                 z0,
                 maxIteration,

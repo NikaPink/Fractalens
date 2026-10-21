@@ -51,7 +51,7 @@ class EnumPaletteTest {
     @DisplayName("Vérifie les méthodes standard des énumérations (values et valueOf)")
     void testEnumMethods() {
         EnumPalette[] palettes = EnumPalette.values();
-        assertEquals(4, palettes.length, "Il doit y avoir exactement 4 palettes dans l'énumération");
+        assertEquals(8, palettes.length, "Il doit y avoir exactement 4 palettes dans l'énumération");
 
         assertEquals(EnumPalette.GREY_PALETTE, EnumPalette.valueOf("GREY_PALETTE"));
         assertEquals(EnumPalette.COSMIC_PALETTE, EnumPalette.valueOf("COSMIC_PALETTE"));

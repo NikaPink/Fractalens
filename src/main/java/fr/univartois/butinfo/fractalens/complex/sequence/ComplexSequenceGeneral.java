@@ -77,7 +77,7 @@ public class ComplexSequenceGeneral implements IComplexSequence {
      * @return A new instance of ComplexSequenceGeneral configured for the
      * Burning Ship fractal.
      */
-    public static ComplexSequenceGeneral burningShip(IComplex z0, Complex c, int maxIteration) {
+    public static ComplexSequenceGeneral burningShip(IComplex z0, IComplex c, int maxIteration) {
         return new ComplexSequenceGeneral(
                 z0,
                 maxIteration,
@@ -113,6 +113,21 @@ public class ComplexSequenceGeneral implements IComplexSequence {
                     IComplex absComplex = new Complex(real, imaginary);
 
                     return absComplex.pow(p).add(initial);
+                }
+        );
+    }
+
+    public static ComplexSequenceGeneral tricornGeneralized(IComplex z0,Complex c, int maxIteration, int p) {
+        return new ComplexSequenceGeneral(
+                z0,
+                maxIteration,
+                (IComplex initial, IComplex prev) -> {
+                    double real = Math.abs(prev.getRealPart());
+                    double imaginary = Math.abs(prev.getImaginaryPart());
+
+                    IComplex absComplex = new Complex(real, imaginary);
+
+                    return (absComplex.conjugate().pow(p)).add(c);
                 }
         );
     }

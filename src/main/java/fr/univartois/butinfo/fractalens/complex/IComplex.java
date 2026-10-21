@@ -112,4 +112,14 @@ public interface IComplex {
      */
     IComplex divide(IComplex other);
 
+    /**
+     * Computes the power of this complex number.
+     * The result is obtained by multiplying this complex number by itself {@code p} times.
+     *
+     * @param p The exponent to which this complex number is raised.
+     *
+     * @return A new complex number representing this complex number raised to the power {@code p}.
+     */
+    IComplex pow(int p);
+
 }

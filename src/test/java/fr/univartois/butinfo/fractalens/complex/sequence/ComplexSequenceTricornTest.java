@@ -1,5 +1,6 @@
 /*
  * FractaLens - A Fractal Generator Library Developed in Lens.
+ *
  * Copyright (c) 2022-2026 Romain Wallon - Université d'Artois.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -14,11 +15,11 @@
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
- * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
- * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
- * USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 package fr.univartois.butinfo.fractalens.complex.sequence;
@@ -26,49 +27,42 @@ package fr.univartois.butinfo.fractalens.complex.sequence;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import fr.univartois.butinfo.fractalens.complex.Complex;
 import org.junit.jupiter.api.Test;
 
+import fr.univartois.butinfo.fractalens.complex.Complex;
 import fr.univartois.butinfo.fractalens.complex.IComplex;
 
 /**
- * The ComplexSequenceTest tests the implementation of {@link IComplexSequence} for
- * Julia's sequence.
+ * The ComplexSequenceTricornTest tests the implementation of {@link IComplexSequence}
+ * for Tricorn's sequence.
  *
  * @author Romain Wallon
- *
  * @version 0.1.0
  */
-class ComplexSequenceTest {
+class ComplexSequenceTricornTest {
 
     /**
      * Creates a new complex number.
      *
      * @param realPart The real part of the complex number.
      * @param imaginaryPart The imaginary part of the complex number.
-     *
      * @return The created complex number.
      */
     private static IComplex createComplex(double realPart, double imaginaryPart) {
-        // TODO Create here an instance of your class implementing IComplex.
-        return new Complex(realPart,imaginaryPart);
+        return new Complex(realPart, imaginaryPart);
     }
 
     /**
-     * Creates a new sequence implementing Julia's sequence.
+     * Creates a new sequence implementing Tricorn's sequence.
      *
      * @param first The first term of the sequence.
-     * @param constant The constant number in the definition of the considered Julia's
-     *        sequence.
+     * @param constant The constant number in the definition of the Tricorn sequence.
      * @param nbTerms The maximum number of terms to compute.
-     *
-     * @return The created Julia's sequence.
+     * @return The created Tricorn sequence.
      */
-    private static IComplexSequence createJuliaSequence(
+    private static IComplexSequence createTricornSequence(
             IComplex first, IComplex constant, int nbTerms) {
-        // TODO Create here an instance of your class implementing IComplexSequence for
-        // Julia's sequence.
-        return new ComplexSequence(first,constant,nbTerms);
+        return new ComplexSequenceTricorn(first, constant, nbTerms);
     }
 
     /**
@@ -77,18 +71,23 @@ class ComplexSequenceTest {
      */
     @Test
     void testComputeNext() {
-        IComplex z0 = createComplex(0.5, 0);
-        IComplex c = createComplex(0, 0);
-        IComplexSequence julia = createJuliaSequence(z0, c, 50);
+        // Test avec une partie imaginaire non nulle pour vérifier le conjugué
+        // z0 = 1 + 2i, c = 0.5 - 1i
+        // conj(z0) = 1 - 2i
+        // (1 - 2i)^2 = 1 - 4 - 4i = -3 - 4i
+        // z1 = (-3 - 4i) + (0.5 - 1i) = -2.5 - 5i
+        IComplex z0 = createComplex(1, 2);
+        IComplex c = createComplex(0.5, -1);
+        IComplexSequence tricorn = createTricornSequence(z0, c, 50);
 
-        IComplex z1 = createComplex(0.25, 0);
-        assertEquals(z1, julia.computeNext(z0));
+        IComplex z1 = createComplex(-2.5, -5);
+        assertEquals(z1, tricorn.computeNext(z0));
 
-        IComplex z2 = createComplex(0.0625, 0);
-        assertEquals(z2, julia.computeNext(z1));
-
-        IComplex z3 = createComplex(0.00390625, 0);
-        assertEquals(z3, julia.computeNext(z2));
+        // conj(z1) = -2.5 + 5i
+        // (-2.5 + 5i)^2 = 6.25 - 25 - 25i = -18.75 - 25i
+        // z2 = (-18.75 - 25i) + (0.5 - 1i) = -18.25 - 26i
+        IComplex z2 = createComplex(-18.25, -26);
+        assertEquals(z2, tricorn.computeNext(z1));
     }
 
     /**
@@ -98,14 +97,14 @@ class ComplexSequenceTest {
      */
     @Test
     void testIteratorOnConvergence() {
-        IComplex z0 = createComplex(0.5, 0);
+        IComplex z0 = createComplex(0.1, 0.1);
         IComplex c = createComplex(0, 0);
         int nbTerms = 50;
 
-        IComplexSequence julia = createJuliaSequence(z0, c, nbTerms);
+        IComplexSequence tricorn = createTricornSequence(z0, c, nbTerms);
         int nbIterations = 0;
 
-        for (var _ : julia) {
+        for (var _ : tricorn) {
             nbIterations++;
         }
 
@@ -119,18 +118,17 @@ class ComplexSequenceTest {
      */
     @Test
     void testIteratorOnDivergence() {
-        IComplex z0 = createComplex(2, 0);
-        IComplex c = createComplex(0.5, 0.5);
+        IComplex z0 = createComplex(2, 2);
+        IComplex c = createComplex(1, 1);
         int nbTerms = 50;
 
-        IComplexSequence julia = createJuliaSequence(z0, c, nbTerms);
+        IComplexSequence tricorn = createTricornSequence(z0, c, nbTerms);
         int nbIterations = 0;
 
-        for (var _ : julia) {
+        for (var _ : tricorn) {
             nbIterations++;
         }
 
         assertTrue(nbIterations < nbTerms);
     }
-
 }

@@ -5,15 +5,14 @@ import fr.univartois.butinfo.fractalens.complex.IComplex;
 import java.util.Iterator;
 
 public class ComplexSequence implements IComplexSequence{
-    IComplex c;
-    IComplex z0;
-    int max;
+    private final IComplex c;
+    private final IComplex z0;
+    private final int max;
 
     public ComplexSequence(IComplex prem,IComplex c,int nbmax){
         this.c=c;
         z0=prem;
         max=nbmax;
-        iterator();
     }
     @Override
     public IComplex computeNext(IComplex previous) {

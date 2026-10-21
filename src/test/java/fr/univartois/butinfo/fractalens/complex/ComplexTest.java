@@ -333,4 +333,34 @@ class ComplexTest {
         assertEquals("2.0 + 2.0i", z.toString());
     }
 
+    /**
+     * Test method for
+     * {@link fr.univartois.butinfo.fractalens.complex.IComplex#pow(int)}.
+     */
+    @Test
+    void testPow() {
+        IComplex zero = createComplex(0, 0);
+        IComplex one = createComplex(1, 0);
+        IComplex i = createComplex(0, 1);
+        IComplex z = createComplex(2, 2);
+
+        assertEquals(createComplex(1, 0), one.pow(0));
+        assertEquals(createComplex(1, 0), i.pow(0));
+        assertEquals(createComplex(1, 0), z.pow(0));
+
+        assertEquals(zero, zero.pow(1));
+        assertEquals(one, one.pow(1));
+        assertEquals(i, i.pow(1));
+        assertEquals(z, z.pow(1));
+
+        assertEquals(createComplex(-1, 0), i.pow(2));
+        assertEquals(createComplex(0, 8), z.pow(2));
+
+        assertEquals(createComplex(0, -1), i.pow(3));
+        assertEquals(createComplex(-16, 16), z.pow(3));
+
+        assertEquals(createComplex(1, 0), i.pow(4));
+        assertEquals(createComplex(-64, 0), z.pow(4));
+    }
+
 }

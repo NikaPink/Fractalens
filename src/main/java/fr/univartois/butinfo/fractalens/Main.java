@@ -126,10 +126,35 @@ public class Main {
         generator.saveImage();
     }
 
+    public static void snowFlakeFractale() {
+        int maxIterations = 300;
+
+        // Coordonnées corrigées pour taper exactement sur la pointe de la branche à 60°
+        Complex translation = new Complex(0.525, 0.90);
+        double zoomFactor = 0.00015;
+
+        ComplexPlane plan = new ComplexPlane(800, 800);
+        ZoomableComplexPlane planZoom = new ZoomableComplexPlane(plan, zoomFactor);
+        TranslationComplexPlane translatePlan = new TranslationComplexPlane(planZoom, translation);
+
+        // On utilise la FixedPalette avec ta liste cosmicPalette !
+        // Son effet modulo garantit des anneaux de couleurs spectaculaires.
+        IPalette palette = new FixedPalette(cosmicPalette);
+
+        BiFunction<IComplex, Integer, IComplexSequence> sequenceFactory =
+                ComplexSequenceGeneral::blackSnowFlake;
+
+        FractalGenerator generator = new FractalGenerator(
+                translatePlan, palette, sequenceFactory, maxIterations, "fractale_flocon.png");
+        generator.generateImage();
+        generator.saveImage();
+    }
+
     public static void main(String[] args) {
         firstFractale();
         secondFractale();
         mandelbrotFractale();
         burningShipFractale();
+        snowFlakeFractale();
     }
 }

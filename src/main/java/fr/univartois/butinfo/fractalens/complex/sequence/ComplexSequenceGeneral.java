@@ -52,4 +52,13 @@ public class ComplexSequenceGeneral implements IComplexSequence {
         );
     }
 
+    public static ComplexSequenceGeneral blackSnowFlake(IComplex z0, int maxIteration){
+        return new ComplexSequenceGeneral(z0,maxIteration,(IComplex initial,IComplex prev) -> {
+            IComplex complex = new Complex(prev.getRealPart(), prev.getImaginaryPart());
+
+            return complex.pow(4).add(complex.pow(2)).add(z0);
+        }
+        );
+    }
+
 }

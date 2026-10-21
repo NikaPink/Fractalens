@@ -13,7 +13,12 @@ public enum EnumPalette {
     /**
      * Cosmic palette
      */
-    COSMIC_PALETTE(max  -> new FixedPalette(Main.cosmicPalette)),
+    COSMIC_PALETTE(max  -> new FixedPalette(PaletteCollections.cosmicPalette)),
+
+    /**
+     * Aurora palette
+     */
+    AURORA_PALETTE(max  -> new FixedPalette(PaletteCollections.auroraPalette)),
     /**
      * Gradient palette
      */

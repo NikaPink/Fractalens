@@ -26,6 +26,15 @@ class EnumPaletteTest {
     }
 
     @Test
+    @DisplayName("Vérifie la création de la palette AURORA_PALETTE")
+    void testCreateAuroraPalette() {
+        IPalette palette = EnumPalette.AURORA_PALETTE.create(250);
+        assertNotNull(palette, "La palette AURORA_PALETTE ne doit pas être nulle");
+        assertEquals(java.awt.Color.BLACK, palette.getColor(250),
+                "L'intérieur de la fractale (250 itérations) doit être noir");
+    }
+
+    @Test
     @DisplayName("Vérifie la création de la palette GRADIENT_NOIR_BLANC_PALETTE")
     void testCreateGradientNoirBlancPalette() {
         IPalette palette = EnumPalette.GRADIENT_NOIR_BLANC_PALETTE.create(255);
@@ -51,9 +60,10 @@ class EnumPaletteTest {
     @DisplayName("Vérifie les méthodes standard des énumérations (values et valueOf)")
     void testEnumMethods() {
         EnumPalette[] palettes = EnumPalette.values();
-        assertEquals(8, palettes.length, "Il doit y avoir exactement 4 palettes dans l'énumération");
+        assertEquals(9, palettes.length, "Il doit y avoir exactement 9 palettes dans l'énumération");
 
         assertEquals(EnumPalette.GREY_PALETTE, EnumPalette.valueOf("GREY_PALETTE"));
         assertEquals(EnumPalette.COSMIC_PALETTE, EnumPalette.valueOf("COSMIC_PALETTE"));
+        assertEquals(EnumPalette.AURORA_PALETTE, EnumPalette.valueOf("AURORA_PALETTE"));
     }
 }

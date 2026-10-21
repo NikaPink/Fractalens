@@ -21,8 +21,23 @@ public enum EnumPalette {
     /**
      * Gradient palette
      */
-    GRADIENT_ROUGE_NOIR_PALETTE(max -> new GradientPalette(Color.red, Color.black,max));;
-
+    GRADIENT_ROUGE_NOIR_PALETTE(max -> new GradientPalette(Color.red, Color.black,max)),
+    /**
+     * Gradient palette
+     */
+    GRADIENT_VERT_ORANGE_PALETTE(max -> new GradientPalette( Color.green,Color.orange,max)),
+    /**
+     * Gradient palette
+     */
+    GRADIENT_PINK_RED_PALETTE(max -> new GradientPalette(Color.pink, Color.red,max)),
+    /**
+     * Gradient palette
+     */
+    GRADIENT_GREEN_BLUE_PALETTE(max -> new GradientPalette( Color.green,Color.blue,max)),
+    /**
+     * Gradient palette
+     */
+    GRADIENT_NOIR_VERT_PALETTE(max -> new GradientPalette(Color.black, Color.green,max));
     /**
      * palette
      */

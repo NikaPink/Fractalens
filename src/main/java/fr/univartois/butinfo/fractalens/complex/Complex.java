@@ -92,4 +92,17 @@ public class Complex implements IComplex
         return Objects.hash(real, imaginary);
     }
 
+    public IComplex pow(int p) {
+        if (p == 0) {
+            return new Complex(1, 0);
+        }
+        if(p == 1){
+            return this;
+        }
+        IComplex c = this;
+        for(int i = 2; i <= p; i++){
+            c = c.multiply(this);
+        }
+        return c;
+    }
 }

@@ -11,7 +11,7 @@ import java.util.function.BiFunction;
 
 public class Main {
 
-    public static List<Color> cosmicPalette = List.of(
+    static List<Color> cosmicPalette = List.of(
             new Color(4, 4, 20),      // 0: Vide abyssal (presque noir)
             new Color(20, 10, 50),    // 1: Violet très sombre
             new Color(55, 15, 90),    // 2: Prune profond

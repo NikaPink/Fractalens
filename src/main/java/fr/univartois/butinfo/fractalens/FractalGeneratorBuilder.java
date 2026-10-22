@@ -44,6 +44,8 @@ public class FractalGeneratorBuilder {
     /** The name of the output image file. */
     private String outputFile = "fractale.png";
 
+    /** The composite*/
+    private FractalGeneratorComposite composite;
     /**
      * Sets the dimensions of the generated image.
      *
@@ -129,6 +131,7 @@ public class FractalGeneratorBuilder {
         this.outputFile = outputFile;
         return this;
     }
+
 
     /**
      * Builds and returns the configured FractalGenerator.

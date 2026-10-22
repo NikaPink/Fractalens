@@ -29,16 +29,4 @@ public class ZoomableComplexPlane implements IComplexPlane {
         return plane.asComplex(row, column).multiply(zoomFactor);
     }
 
-    /**     *
-     * @param zoomMultiplier The multiplier to apply to the current zoom factor.
-     *                       It must be between 0 and 1 (inclusive).
-     * @throws IllegalArgumentException If the value of {@code zoomMultiplier} is
-     *                                  strictly less than 0 or strictly greater than 1.
-     */
-    public void zoomAnimation(double zoomMultiplier) {
-        if (zoomMultiplier < 0 || zoomMultiplier > 1) {
-            throw new IllegalArgumentException("Zoom multiplier must be between 0 and 1");
-        }
-        zoomFactor = zoomFactor * zoomMultiplier;
-    }
 }

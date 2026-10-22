@@ -140,12 +140,11 @@ public class FractalGeneratorBuilder {
      */
     public FractalGenerator build() {
         if (palette == null || sequenceFactory == null) {
-            throw new IllegalStateException("La palette et la séquence doivent être configurées.");
+            throw new IllegalStateException("The palette and sequence must be configured.");
         }
 
-        // Assemblage des décorateurs pour le plan complexe
-        ComplexPlane plan = new ComplexPlane(height, width);
-        ZoomableComplexPlane planZoom = new ZoomableComplexPlane(plan, zoom);
+        ComplexPlane plane = new ComplexPlane(height, width);
+        ZoomableComplexPlane planZoom = new ZoomableComplexPlane(plane, zoom);
         TranslationComplexPlane translatePlan = new TranslationComplexPlane(planZoom, center);
 
         return new FractalGenerator(translatePlan, palette, sequenceFactory, maxIterations, outputFile);
@@ -192,7 +191,7 @@ public class FractalGeneratorBuilder {
      */
     public FractalGeneratorComposite buildSpin(EnumComplexSequence sequence, IComplex c, int nbFrames, int delay, String gifPath){
         if (!sequence.isRotatable()) {
-            throw new IllegalArgumentException("La séquence " + sequence + " n'utilise pas de constante c, elle ne peut pas tourner.");
+            throw new IllegalArgumentException("The sequence " + sequence + " doesn't use the constant c, it can't run.");
         }
         FractalGeneratorComposite composite = new FractalGeneratorComposite(delay, gifPath);
         for(int i = 0; i < nbFrames; i++){

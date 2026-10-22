@@ -74,31 +74,31 @@ IFractalGenerator --> IComplexSequence : << uses >>
 
 ## Feature list
 
-| Features                                               | Design Pattern(s) (?)       | Author(s) |
-|--------------------------------------------------------|-----------------------------|-----------|
-| Complex number                                         |                             |           |
-| Default complex plane                                  |                             |           |
-| Scaled complex plane                                   |                             |           |
-| Translated complex plane                               |                             |           |
-| Sequence of complex numbers                            |                             |           |
-| Iterator over a sequence of complex numbers            |                             |           |
-| Julia sequence                                         |                             |           |
-| Mandelbrot sequence                                    |                             |           |
-| Multijulia sequence                                    |                             |           |
-| Multibrot sequence                                     |                             |           |
-| Generic sequences                                      |                             |           |
-| Color palette                                          |                             |           |
-| Grey scale palette                                     |                             |           |
-| Red/Green/Blue/... scale palette                       |                             |           |
-| Inverted color palette                                 |                             |           |
-| Gradient-based color palette                           |                             |           |
-| Predefined color palette                               |                             |           |
-| `BufferedImage` used as an `IFractalImage`             |                             |           |
-| Static image generation                                |                             |           |
-| Scale-based animated image generation                  |                             |           |
-| Rotation-based animated image generation               |                             |           |
-| Configuration of the fractal generator                 |                             |           |
-| Command-line interface                                 |                             |           |
+| Features                                               | Design Pattern(s) (?) | Author(s) |
+|--------------------------------------------------------|-----------------------|-----------|
+| Complex number                                         | none                  | DL        |
+| Default complex plane                                  | none                  | PY        |
+| Scaled complex plane                                   | decorator             | MN        |
+| Translated complex plane                               | decorator             | DL        |
+| Sequence of complex numbers                            | strategy              | CL        |
+| Iterator over a sequence of complex numbers            | iterator              | MN        |
+| Julia sequence                                         | strategy              | CL        |
+| Mandelbrot sequence                                    | strategy              | PY        |
+| Multijulia sequence                                    | strategy              | CL        |
+| Multibrot sequence                                     | strategy              | PY        |
+| Generic sequences                                      | strategy              | DL and MN |
+| Color palette                                          | strategy              | CL        |
+| Grey scale palette                                     | strategy              | CL        |
+| Red/Green/Blue/... scale palette                       | decorator             | PY        |
+| Inverted color palette                                 | decorator             | MN        |
+| Gradient-based color palette                           | strategy              | CL        |
+| Predefined color palette                               | strategy              | MN        |
+| `BufferedImage` used as an `IFractalImage`             | adapter               | DL        |
+| Static image generation                                | none                  | group     |
+| Scale-based animated image generation                  | composite             | MN        |
+| Rotation-based animated image generation               | composite             | PY        |
+| Configuration of the fractal generator                 | builder               | DL        |
+| Command-line interface                                 |                       |           |
 
 ## Team
 

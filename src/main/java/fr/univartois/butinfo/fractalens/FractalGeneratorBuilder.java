@@ -166,6 +166,31 @@ public class FractalGeneratorBuilder {
     }
 
     /**
+     * Builds a composite generator for a zoom animation.
+     *
+     * @param nbFrames       Number of frames to generate (must be > 0).
+     * @param zoomMultiplier Zoom multiplier applied at each frame (between 0 and 1).
+     * @param delay          Delay between frames in milliseconds.
+     * @return The configured FractalGeneratorComposite.
+     */
+    public FractalGeneratorComposite zoomAnimation(int nbFrames, double zoomMultiplier, int delay) {
+        if (zoomMultiplier < 0 || zoomMultiplier > 1 || nbFrames <= 0) {
+            throw new IllegalArgumentException("Invalid zoom multiplier or frame count.");
+        }
+
+        FractalGeneratorComposite composite = new FractalGeneratorComposite(delay, outputFile);
+        double originalZoom = this.zoom;
+
+        for (int i = 0; i < nbFrames; i++) {
+            composite.addGenerator(this.build());
+            this.zoom *= zoomMultiplier;
+        }
+
+        this.zoom = originalZoom;
+        return composite;
+    }
+
+    /**
      * Builds an animated fractal where the constant c turns around the origin:
      * one frame per angle theta between 0 and 2*PI.
      *

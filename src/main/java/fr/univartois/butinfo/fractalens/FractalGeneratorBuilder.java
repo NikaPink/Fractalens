@@ -1,6 +1,7 @@
 package fr.univartois.butinfo.fractalens;
 
 import fr.univartois.butinfo.fractalens.complex.*;
+import fr.univartois.butinfo.fractalens.complex.sequence.EnumComplexSequence;
 import fr.univartois.butinfo.fractalens.complex.sequence.IComplexSequence;
 import fr.univartois.butinfo.fractalens.generator.FractalGenerator;
 import fr.univartois.butinfo.fractalens.generator.FractalGeneratorComposite;
@@ -172,6 +173,29 @@ public class FractalGeneratorBuilder {
         }
 
         this.zoom = originalZoom;
+        return composite;
+    }
+
+    /**
+     * Builds an animated fractal where the constant c turns around the origin:
+     * one frame per angle theta between 0 and 2*PI.
+     *
+     * @param sequence The sequence to animate (must use the constant c).
+     * @param c The constant before rotation.
+     * @param nbFrames The number of frames of the animation.
+     * @param delay The delay in milliseconds between two frames.
+     * @param gifPath The path of the output GIF file.
+     *
+     * @return A composite generating every frame of the animation.
+     */
+    public FractalGeneratorComposite buildSpin(EnumComplexSequence sequence, IComplex c, int nbFrames, int delay, String gifPath){
+        FractalGeneratorComposite composite = new FractalGeneratorComposite(delay, gifPath);
+        for(int i = 0; i < nbFrames; i++){
+            double theta = 2*Math.PI*i/nbFrames;
+            IComplex rotated = c.multiply(new Complex(Math.cos(theta), Math.sin(theta)));
+            withSequenceFactory(sequence.getFunction(rotated));
+            composite.addGenerator(build());
+        }
         return composite;
     }
 }

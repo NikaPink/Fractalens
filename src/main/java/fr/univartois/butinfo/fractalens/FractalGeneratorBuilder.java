@@ -3,6 +3,7 @@ package fr.univartois.butinfo.fractalens;
 import fr.univartois.butinfo.fractalens.complex.*;
 import fr.univartois.butinfo.fractalens.complex.sequence.IComplexSequence;
 import fr.univartois.butinfo.fractalens.generator.FractalGenerator;
+import fr.univartois.butinfo.fractalens.generator.FractalGeneratorComposite;
 import fr.univartois.butinfo.fractalens.image.IPalette;
 
 import java.util.function.BiFunction;
@@ -147,5 +148,30 @@ public class FractalGeneratorBuilder {
         TranslationComplexPlane translatePlan = new TranslationComplexPlane(planZoom, center);
 
         return new FractalGenerator(translatePlan, palette, sequenceFactory, maxIterations, outputFile);
+    }
+
+    /**
+     * Builds a composite generator for a zoom animation.
+     *
+     * @param nbFrames       Number of frames to generate (must be > 0).
+     * @param zoomMultiplier Zoom multiplier applied at each frame (between 0 and 1).
+     * @param delay          Delay between frames in milliseconds.
+     * @return The configured FractalGeneratorComposite.
+     */
+    public FractalGeneratorComposite zoomAnimation(int nbFrames, double zoomMultiplier, int delay) {
+        if (zoomMultiplier < 0 || zoomMultiplier > 1 || nbFrames <= 0) {
+            throw new IllegalArgumentException("Invalid zoom multiplier or frame count.");
+        }
+
+        FractalGeneratorComposite composite = new FractalGeneratorComposite(delay, outputFile);
+        double originalZoom = this.zoom;
+
+        for (int i = 0; i < nbFrames; i++) {
+            composite.addGenerator(this.build());
+            this.zoom *= zoomMultiplier;
+        }
+
+        this.zoom = originalZoom;
+        return composite;
     }
 }

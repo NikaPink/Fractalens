@@ -1,8 +1,10 @@
 package fr.univartois.butinfo.fractalens;
 
 import fr.univartois.butinfo.fractalens.complex.*;
+import fr.univartois.butinfo.fractalens.complex.sequence.EnumComplexSequence;
 import fr.univartois.butinfo.fractalens.complex.sequence.IComplexSequence;
 import fr.univartois.butinfo.fractalens.generator.FractalGenerator;
+import fr.univartois.butinfo.fractalens.generator.FractalGeneratorComposite;
 import fr.univartois.butinfo.fractalens.image.IPalette;
 
 import java.util.function.BiFunction;
@@ -42,6 +44,8 @@ public class FractalGeneratorBuilder {
     /** The name of the output image file. */
     private String outputFile = "fractale.png";
 
+    /** The composite*/
+    private FractalGeneratorComposite composite;
     /**
      * Sets the dimensions of the generated image.
      *
@@ -128,6 +132,7 @@ public class FractalGeneratorBuilder {
         return this;
     }
 
+
     /**
      * Builds and returns the configured FractalGenerator.
      * This method orchestrates the creation of the underlying complex planes (base, zoom, and translation).
@@ -138,14 +143,66 @@ public class FractalGeneratorBuilder {
      */
     public FractalGenerator build() {
         if (palette == null || sequenceFactory == null) {
-            throw new IllegalStateException("La palette et la séquence doivent être configurées.");
+            throw new IllegalStateException("The palette and sequence must be configured.");
         }
 
-        // Assemblage des décorateurs pour le plan complexe
-        ComplexPlane plan = new ComplexPlane(height, width);
-        ZoomableComplexPlane planZoom = new ZoomableComplexPlane(plan, zoom);
+        ComplexPlane plane = new ComplexPlane(height, width);
+        ZoomableComplexPlane planZoom = new ZoomableComplexPlane(plane, zoom);
         TranslationComplexPlane translatePlan = new TranslationComplexPlane(planZoom, center);
 
         return new FractalGenerator(translatePlan, palette, sequenceFactory, maxIterations, outputFile);
+    }
+
+    /**
+     * Builds a composite generator for a zoom animation.
+     *
+     * @param nbFrames       Number of frames to generate (must be > 0).
+     * @param zoomMultiplier Zoom multiplier applied at each frame (between 0 and 1).
+     * @param delay          Delay between frames in milliseconds.
+     * @return The configured FractalGeneratorComposite.
+     */
+    public FractalGeneratorComposite zoomAnimation(int nbFrames, double zoomMultiplier, int delay) {
+        if (zoomMultiplier < 0 || zoomMultiplier > 1 || nbFrames <= 0) {
+            throw new IllegalArgumentException("Invalid zoom multiplier or frame count.");
+        }
+
+        FractalGeneratorComposite composite = new FractalGeneratorComposite(delay, outputFile);
+        double originalZoom = this.zoom;
+
+        for (int i = 0; i < nbFrames; i++) {
+            composite.addGenerator(this.build());
+            this.zoom *= zoomMultiplier;
+        }
+
+        this.zoom = originalZoom;
+        return composite;
+    }
+
+    /**
+     * Builds an animated fractal where the constant c turns around the origin:
+     * one frame per angle theta between 0 and 2*PI.
+     *
+     * @param sequence The sequence to animate (must use the constant c).
+     * @param c The constant before rotation.
+     * @param nbFrames The number of frames of the animation.
+     * @param delay The delay in milliseconds between two frames.
+     * @param gifPath The path of the output GIF file.
+     *
+     * @return A composite generating every frame of the animation.
+     *
+     * @throws IllegalArgumentException If the sequence does not use the constant c.
+     */
+    public FractalGeneratorComposite buildSpin(EnumComplexSequence sequence, IComplex c, int nbFrames, int delay, String gifPath){
+        if (!sequence.isRotatable()) {
+            throw new IllegalArgumentException("The sequence " + sequence + " doesn't use the constant c, it can't run.");
+        }
+        FractalGeneratorComposite composite = new FractalGeneratorComposite(delay, gifPath);
+        for(int i = 0; i < nbFrames; i++){
+            double theta = 2*Math.PI*i/nbFrames;
+            IComplex rotated = c.multiply(new Complex(Math.cos(theta), Math.sin(theta)));
+            withSequenceFactory(sequence.getFunction(rotated));
+            composite.addGenerator(build());
+        }
+        return composite;
     }
 }

@@ -72,4 +72,44 @@ class FractalGeneratorBuilderTest {
         assertThrows(IllegalStateException.class, builder::build,
                 "Building with missing mandatory parameters should throw an exception.");
     }
+
+
+    /**
+     * Test method verifying that zoomAnimation creates a composite with the requested number of frames.
+     */
+    @Test
+    void testZoomAnimationValid() {
+        IPalette dummyPalette = iter -> Color.BLACK;
+        BiFunction<IComplex, Integer, IComplexSequence> dummySequence = (z0, max) -> null;
+
+        FractalGeneratorBuilder builder = new FractalGeneratorBuilder()
+                .withPalette(dummyPalette)
+                .withSequenceFactory(dummySequence);
+
+        FractalGeneratorComposite composite = builder.zoomAnimation(3, 0.5, 100);
+
+        assertNotNull(composite);
+        assertEquals(3, composite.getGenerators().size());
+    }
+
+    /**
+     * Test method verifying that zoomAnimation throws an exception for an invalid number of frames.
+     */
+    @Test
+    void testZoomAnimationInvalidNbFrames() {
+        FractalGeneratorBuilder builder = new FractalGeneratorBuilder();
+
+        assertThrows(IllegalArgumentException.class, () -> builder.zoomAnimation(0, 0.5, 100));
+    }
+
+    /**
+     * Test method verifying that zoomAnimation throws an exception for invalid zoom multipliers.
+     */
+    @Test
+    void testZoomAnimationInvalidZoomMultiplier() {
+        FractalGeneratorBuilder builder = new FractalGeneratorBuilder();
+
+        assertThrows(IllegalArgumentException.class, () -> builder.zoomAnimation(3, -0.1, 100));
+        assertThrows(IllegalArgumentException.class, () -> builder.zoomAnimation(3, 1.5, 100));
+    }
 }

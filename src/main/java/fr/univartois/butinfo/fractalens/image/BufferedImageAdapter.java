@@ -90,4 +90,16 @@ public class BufferedImageAdapter implements IFractalImage {
 
         ImageIO.write(image, extension, file);
     }
+
+    /**
+     * Returns the underlying {@link java.awt.image.BufferedImage} wrapped by this fractal image.
+     * This method allows interoperability with standard Java external libraries,
+     * such as the GIF encoder, which require native image formats.
+     *
+     * @return The underlying BufferedImage instance.
+     */
+    @Override
+    public BufferedImage asBufferedImage() {
+        return image;
+    }
 }

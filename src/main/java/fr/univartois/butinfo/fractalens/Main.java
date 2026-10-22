@@ -88,11 +88,37 @@ public class Main {
         generator.saveImage();
     }
 
+
+    public static void firstFractaleZoom(){
+        FractalGeneratorBuilder builder = new FractalGeneratorBuilder()
+                .withCenter(new Complex(-0.743643887037151, 0.131825904205330))
+                .withMaxIterations(250)
+                .withPalette(EnumPalette.AURORA_PALETTE.create(250))
+                .withSequenceFactory(EnumComplexSequence.MANDELBROT.getFunction(new Complex(0.1, 0.6)))
+                .withOutputFile("fractale_1.gif")
+                .withSize(800,800)
+                .withZoom(0.001);
+        FractalGeneratorComposite generator = builder.zoomAnimation(100,0.9,90);
+        generator.generateImage();
+        generator.saveImage();
+    }
+
+    public static void firstFractaleSpin(){
+        FractalGeneratorBuilder builder = new FractalGeneratorBuilder()
+                .withCenter(new Complex(0, 0))
+                .withMaxIterations(250)
+                .withPalette(EnumPalette.COSMIC_PALETTE.create(250))
+                .withSequenceFactory(EnumComplexSequence.JULIA.getFunction(new Complex(0.7885, 0)))
+                .withOutputFile("fractale_2.gif")
+                .withSize(800,800)
+                .withZoom(0.004);
+        FractalGeneratorComposite generator = builder.buildSpin(EnumComplexSequence.JULIA,new Complex(0.7885, 0),100,90,"fractale_2.gif");
+        generator.generateImage();
+        generator.saveImage();
+    }
+
     public static void main(String[] args) {
-        firstFractale();
-        secondFractale();
-        mandelbrotFractale();
-        burningShipFractale();
-        snowFlakeFractale();
+        firstFractaleZoom();
+        firstFractaleSpin();
     }
 }

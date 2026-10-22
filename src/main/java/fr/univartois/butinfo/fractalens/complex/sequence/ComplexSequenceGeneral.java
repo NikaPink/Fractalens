@@ -77,7 +77,7 @@ public class ComplexSequenceGeneral implements IComplexSequence {
      * @return A new instance of ComplexSequenceGeneral configured for the
      * Burning Ship fractal.
      */
-    public static ComplexSequenceGeneral burningShip(IComplex z0, Complex c, int maxIteration) {
+    public static ComplexSequenceGeneral burningShip(IComplex z0, IComplex c, int maxIteration) {
         return new ComplexSequenceGeneral(
                 z0,
                 maxIteration,

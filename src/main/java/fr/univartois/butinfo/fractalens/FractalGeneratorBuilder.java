@@ -132,17 +132,6 @@ public class FractalGeneratorBuilder {
         return this;
     }
 
-    /**
-     * Sets the composite name for the generated fractal image.
-     * @param delay The delay
-     * @param outputFile
-     * @return The current builder instance for method chaining.
-     */
-    public FractalGeneratorBuilder withComposite(int delay,String outputFile){
-        this.composite = new FractalGeneratorComposite(delay,outputFile);
-
-        return this;
-    }
 
     /**
      * Builds and returns the configured FractalGenerator.

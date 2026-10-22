@@ -6,7 +6,7 @@ public class ZoomableComplexPlane implements IComplexPlane {
     private final IComplexPlane plane;
 
     /** The scale factor applied to the plan */
-    private final double zoomFactor;
+    private double zoomFactor;
 
     /**
      * Constructs a zoomable complex plane from an existing plane
@@ -28,4 +28,5 @@ public class ZoomableComplexPlane implements IComplexPlane {
     public IComplex asComplex(int row, int column) {
         return plane.asComplex(row, column).multiply(zoomFactor);
     }
+
 }

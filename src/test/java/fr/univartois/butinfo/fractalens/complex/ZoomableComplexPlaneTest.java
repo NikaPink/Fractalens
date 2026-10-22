@@ -1,6 +1,7 @@
 package fr.univartois.butinfo.fractalens.complex;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,6 @@ class ZoomableComplexPlaneTest {
      *
      * @param realPart The real part of the complex number.
      * @param imaginaryPart The imaginary part of the complex number.
-     *
      * @return The created complex number.
      */
     private static IComplex createComplex(double realPart, double imaginaryPart) {
@@ -27,7 +27,6 @@ class ZoomableComplexPlaneTest {
      *
      * @param height The height of the complex plane.
      * @param width The width of the complex plane.
-     *
      * @return The created complex plane.
      */
     private static IComplexPlane createPlane(int height, int width) {
@@ -124,4 +123,57 @@ class ZoomableComplexPlaneTest {
         assertEquals(createComplex(174.75, -124.75), plane.asComplex(500, 700));
     }
 
+    // ========================================================================
+    // TESTS POUR zoomAnimation(double zoomMultiplier)
+    // ========================================================================
+
+    @Test
+    void testZoomAnimationValid() {
+        ZoomableComplexPlane plane = new ZoomableComplexPlane(createPlane(600, 800), 10.0);
+
+        plane.zoomAnimation(0.5);
+
+        // Le zoom initial était de 10.0. Après * 0.5, le nouveau zoom est de 5.0.
+        // asComplex(0,0) pour 600x800 renvoie de base (-400, 300).
+        // Avec un zoom de 5.0, ça doit faire (-2000, 1500).
+        assertEquals(createComplex(-2000, 1500), plane.asComplex(0, 0));
+    }
+
+    @Test
+    void testZoomAnimationLimitOne() {
+        ZoomableComplexPlane plane = new ZoomableComplexPlane(createPlane(600, 800), 10.0);
+
+        plane.zoomAnimation(1.0);
+
+        // Le zoom reste à 10.0. Donc -400 * 10 = -4000 et 300 * 10 = 3000.
+        assertEquals(createComplex(-4000, 3000), plane.asComplex(0, 0));
+    }
+
+    @Test
+    void testZoomAnimationLimitZero() {
+        ZoomableComplexPlane plane = new ZoomableComplexPlane(createPlane(600, 800), 10.0);
+
+        plane.zoomAnimation(0.0);
+
+        // Le zoom devient 0.0. Donc toutes les coordonnées valent (0, 0).
+        assertEquals(createComplex(0, 0), plane.asComplex(0, 0));
+    }
+
+    @Test
+    void testZoomAnimationTooHighThrowsException() {
+        ZoomableComplexPlane plane = new ZoomableComplexPlane(createPlane(600, 800), 1.0);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            plane.zoomAnimation(1.1);
+        });
+    }
+
+    @Test
+    void testZoomAnimationNegativeThrowsException() {
+        ZoomableComplexPlane plane = new ZoomableComplexPlane(createPlane(600, 800), 1.0);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            plane.zoomAnimation(-0.5);
+        });
+    }
 }

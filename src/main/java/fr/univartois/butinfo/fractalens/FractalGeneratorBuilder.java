@@ -187,8 +187,13 @@ public class FractalGeneratorBuilder {
      * @param gifPath The path of the output GIF file.
      *
      * @return A composite generating every frame of the animation.
+     *
+     * @throws IllegalArgumentException If the sequence does not use the constant c.
      */
     public FractalGeneratorComposite buildSpin(EnumComplexSequence sequence, IComplex c, int nbFrames, int delay, String gifPath){
+        if (!sequence.isRotatable()) {
+            throw new IllegalArgumentException("La séquence " + sequence + " n'utilise pas de constante c, elle ne peut pas tourner.");
+        }
         FractalGeneratorComposite composite = new FractalGeneratorComposite(delay, gifPath);
         for(int i = 0; i < nbFrames; i++){
             double theta = 2*Math.PI*i/nbFrames;

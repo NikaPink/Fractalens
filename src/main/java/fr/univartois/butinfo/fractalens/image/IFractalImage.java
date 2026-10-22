@@ -24,6 +24,7 @@
 package fr.univartois.butinfo.fractalens.image;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
@@ -67,5 +68,15 @@ public interface IFractalImage {
      * @throws IOException If an I/O error occurs when writing the file.
      */
     void saveAs(String path) throws IOException;
+
+
+    /**
+     * Returns the underlying {@link java.awt.image.BufferedImage} wrapped by this fractal image.
+     * This method allows interoperability with standard Java external libraries,
+     * such as the GIF encoder, which require native image formats.
+     *
+     * @return The underlying BufferedImage instance.
+     */
+    BufferedImage asBufferedImage();
 
 }

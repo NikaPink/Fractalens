@@ -2,6 +2,7 @@ package fr.univartois.butinfo.fractalens;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import fr.univartois.butinfo.fractalens.complex.Complex;
 import fr.univartois.butinfo.fractalens.complex.IComplex;
@@ -133,6 +134,17 @@ class JuliaSpinTest {
 
         assertNotEquals(samplePixels(spin.getGenerators().get(0)),
                 samplePixels(spin.getGenerators().get(1)));
+    }
+
+    /**
+     * Checks that a sequence which does not use c cannot be animated.
+     */
+    @Test
+    void testSpinThrowsWhenNotRotatable() {
+        FractalGeneratorBuilder builder = createBuilder();
+
+        assertThrows(IllegalArgumentException.class,
+                () -> builder.buildSpin(EnumComplexSequence.MANDELBROT, C, 4, 50, "spin.gif"));
     }
 
 }

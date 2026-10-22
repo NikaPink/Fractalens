@@ -3,6 +3,7 @@ package fr.univartois.butinfo.fractalens;
 import fr.univartois.butinfo.fractalens.complex.*;
 import fr.univartois.butinfo.fractalens.complex.sequence.IComplexSequence;
 import fr.univartois.butinfo.fractalens.generator.FractalGenerator;
+import fr.univartois.butinfo.fractalens.generator.FractalGeneratorComposite;
 import fr.univartois.butinfo.fractalens.image.IPalette;
 
 import java.util.function.BiFunction;
@@ -42,6 +43,8 @@ public class FractalGeneratorBuilder {
     /** The name of the output image file. */
     private String outputFile = "fractale.png";
 
+    /** The composite*/
+    private FractalGeneratorComposite composite;
     /**
      * Sets the dimensions of the generated image.
      *
@@ -125,6 +128,18 @@ public class FractalGeneratorBuilder {
      */
     public FractalGeneratorBuilder withOutputFile(String outputFile) {
         this.outputFile = outputFile;
+        return this;
+    }
+
+    /**
+     * Sets the composite name for the generated fractal image.
+     * @param delay The delay
+     * @param outputFile
+     * @return The current builder instance for method chaining.
+     */
+    public FractalGeneratorBuilder withComposite(int delay,String outputFile){
+        this.composite = new FractalGeneratorComposite(delay,outputFile);
+
         return this;
     }
 

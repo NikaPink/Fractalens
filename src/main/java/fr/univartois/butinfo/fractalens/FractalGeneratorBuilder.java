@@ -20,6 +20,13 @@ import java.util.function.BiFunction;
  */
 public class FractalGeneratorBuilder {
 
+    /**
+     * Constructs a new FractalGeneratorBuilder with default settings.
+     */
+    public FractalGeneratorBuilder() {
+        // Default constructor
+    }
+
     /** The width of the generated image. */
     private int width = 800;
 
@@ -44,6 +51,8 @@ public class FractalGeneratorBuilder {
     /** The name of the output image file. */
     private String outputFile = "fractale.png";
 
+    /** The composite generator used for animations. */
+    private FractalGeneratorComposite composite;
     /**
      * Sets the dimensions of the generated image.
      *
@@ -145,29 +154,29 @@ public class FractalGeneratorBuilder {
         }
 
         ComplexPlane plane = new ComplexPlane(height, width);
-        ZoomableComplexPlane planZoom = new ZoomableComplexPlane(plane, zoom);
-        TranslationComplexPlane translatePlan = new TranslationComplexPlane(planZoom, center);
+        ZoomableComplexPlane zoomedPlane = new ZoomableComplexPlane(plane, zoom);
+        TranslationComplexPlane translatedPlane = new TranslationComplexPlane(zoomedPlane, center);
 
-        return new FractalGenerator(translatePlan, palette, sequenceFactory, maxIterations, outputFile);
+        return new FractalGenerator(translatedPlane, palette, sequenceFactory, maxIterations, outputFile);
     }
 
     /**
      * Builds a composite generator for a zoom animation.
      *
-     * @param nbFrames       Number of frames to generate (must be > 0).
+     * @param frameCount     Number of frames to generate (must be > 0).
      * @param zoomMultiplier Zoom multiplier applied at each frame (between 0 and 1).
      * @param delay          Delay between frames in milliseconds.
      * @return The configured FractalGeneratorComposite.
      */
-    public FractalGeneratorComposite zoomAnimation(int nbFrames, double zoomMultiplier, int delay) {
-        if (zoomMultiplier < 0 || zoomMultiplier > 1 || nbFrames <= 0) {
+    public FractalGeneratorComposite zoomAnimation(int frameCount, double zoomMultiplier, int delay) {
+        if (zoomMultiplier < 0 || zoomMultiplier > 1 || frameCount <= 0) {
             throw new IllegalArgumentException("Invalid zoom multiplier or frame count.");
         }
 
         FractalGeneratorComposite composite = new FractalGeneratorComposite(delay, outputFile);
         double originalZoom = this.zoom;
 
-        for (int i = 0; i < nbFrames; i++) {
+        for (int i = 0; i < frameCount; i++) {
             composite.addGenerator(this.build());
             this.zoom *= zoomMultiplier;
         }
@@ -182,7 +191,7 @@ public class FractalGeneratorBuilder {
      *
      * @param sequence The sequence to animate (must use the constant c).
      * @param c The constant before rotation.
-     * @param nbFrames The number of frames of the animation.
+     * @param frameCount The number of frames of the animation.
      * @param delay The delay in milliseconds between two frames.
      * @param gifPath The path of the output GIF file.
      *
@@ -190,13 +199,13 @@ public class FractalGeneratorBuilder {
      *
      * @throws IllegalArgumentException If the sequence does not use the constant c.
      */
-    public FractalGeneratorComposite buildSpin(EnumComplexSequence sequence, IComplex c, int nbFrames, int delay, String gifPath){
+    public FractalGeneratorComposite buildSpin(EnumComplexSequence sequence, IComplex c, int frameCount, int delay, String gifPath){
         if (!sequence.isRotatable()) {
             throw new IllegalArgumentException("The sequence " + sequence + " doesn't use the constant c, it can't run.");
         }
         FractalGeneratorComposite composite = new FractalGeneratorComposite(delay, gifPath);
-        for(int i = 0; i < nbFrames; i++){
-            double theta = 2*Math.PI*i/nbFrames;
+        for(int i = 0; i < frameCount; i++){
+            double theta = 2*Math.PI*i/frameCount;
             IComplex rotated = c.multiply(new Complex(Math.cos(theta), Math.sin(theta)));
             withSequenceFactory(sequence.getFunction(rotated));
             composite.addGenerator(build());

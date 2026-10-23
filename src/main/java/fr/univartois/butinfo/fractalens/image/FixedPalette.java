@@ -4,14 +4,22 @@ import java.awt.Color;
 import java.util.List;
 
 /**
- * Each iteration count maps to a specific color in the palette.
+ * The FixedPalette class maps each iteration count to a specific color from a fixed list of colors.
  *
- * @author Fractalens Team
- * @version 1.0
+ * @author FractaLens Team
  */
 public class FixedPalette implements IPalette {
-    private List<Color> colors;
 
+    /**
+     * The fixed list of colors representing the palette steps.
+     */
+    private final List<Color> colors;
+
+    /**
+     * Constructs a new FixedPalette with the provided list of colors.
+     *
+     * @param colors The list of colors.
+     */
     public FixedPalette(List<Color> colors) {
         this.colors = colors;
     }
@@ -20,8 +28,9 @@ public class FixedPalette implements IPalette {
      * If the iteration number is less than or equal to zero, the first color is returned.
      * If it exceeds or equals the palette size, the last color is returned.
      *
-     * @param iterationNumber the number of iterations computed for a pixel
-     * @return the corresponding {@link Color} from the palette
+     * @param iterationNumber The number of iterations computed for a pixel.
+     *
+     * @return The corresponding {@link Color} from the palette.
      */
     @Override
     public Color getColor(int iterationNumber) {
@@ -29,7 +38,7 @@ public class FixedPalette implements IPalette {
             return colors.get(0);
         }
         if (iterationNumber >= colors.size()) {
-            return colors.get(iterationNumber%colors.size());
+            return colors.get(iterationNumber % colors.size());
         }
         return colors.get(iterationNumber);
     }

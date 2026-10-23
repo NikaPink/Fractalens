@@ -1,17 +1,24 @@
 package fr.univartois.butinfo.fractalens.complex;
 
+/**
+ * The ZoomableComplexPlane class decorates an {@link IComplexPlane} to scale
+ * (zoom in or out) the coordinates of the complex plane.
+ *
+ * @author FractaLens Team
+ */
 public class ZoomableComplexPlane implements IComplexPlane {
 
-    /** The original complex plane, decorated */
+    /** The original complex plane, decorated. */
     private final IComplexPlane plane;
 
-    /** The scale factor applied to the plan */
+    /** The scale factor applied to the plane. */
     private double zoomFactor;
 
     /**
-     * Constructs a zoomable complex plane from an existing plane
-     * @param plane The base complex plane to be decorated
-     * @param zoomFactor The zoom factor to apply to the complex numbers
+     * Constructs a zoomable complex plane from an existing plane.
+     *
+     * @param plane The base complex plane to be decorated.
+     * @param zoomFactor The zoom factor to apply to the complex numbers.
      */
     public ZoomableComplexPlane(IComplexPlane plane, double zoomFactor) {
         this.plane = plane;
@@ -19,14 +26,15 @@ public class ZoomableComplexPlane implements IComplexPlane {
     }
 
     /**
-     * Obtains the complex number from the original plane and multiplies it by the zoom factor
-     * @param row The row of the pixel in the image
-     * @param column The column of the pixel in the image
-     * @return The complex number corresponding to the pixel, adjusted by the zoom
+     * Obtains the complex number from the original plane and multiplies it by the zoom factor.
+     *
+     * @param row The row of the pixel in the image.
+     * @param column The column of the pixel in the image.
+     *
+     * @return The complex number corresponding to the pixel, adjusted by the zoom.
      */
     @Override
     public IComplex asComplex(int row, int column) {
         return plane.asComplex(row, column).multiply(zoomFactor);
     }
-
 }

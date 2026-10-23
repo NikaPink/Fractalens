@@ -15,6 +15,8 @@ import java.util.function.BiFunction;
 /**
  * The FractalGenerator class implements the IFractalGenerator interface and provides
  * methods for generating and saving fractal images.
+ *
+ * @author FractaLens Team
  */
 public class FractalGenerator implements IFractalGenerator {
 
@@ -35,11 +37,16 @@ public class FractalGenerator implements IFractalGenerator {
     private final String path;
 
     /**
-     * Constructor.
+     * Constructs a new FractalGenerator with the specified parameters.
      *
+     * @param plane The complex plane to use.
+     * @param palette The color palette.
+     * @param sequence The sequence factory function.
+     * @param maxIterations The maximum number of iterations.
+     * @param path The file path for the output image.
      */
-    public FractalGenerator( IComplexPlane plane, IPalette palette, BiFunction<IComplex,Integer, IComplexSequence> sequence, int maxIterations, String path) {
-        this.image = new BufferedImageAdapter(800,800);
+    public FractalGenerator(IComplexPlane plane, IPalette palette, BiFunction<IComplex, Integer, IComplexSequence> sequence, int maxIterations, String path) {
+        this.image = new BufferedImageAdapter(800, 800);
         this.plane = plane;
         this.palette = palette;
         this.sequence = sequence;
@@ -48,8 +55,9 @@ public class FractalGenerator implements IFractalGenerator {
     }
 
     /**
-     * Generate the fractal image.
-     * @return image
+     * Generates the fractal image by computing the color for each pixel.
+     *
+     * @return The generated fractal image.
      */
     @Override
     public IFractalImage generateImage() {
@@ -62,10 +70,12 @@ public class FractalGenerator implements IFractalGenerator {
     }
 
     /**
-     * Compute the color of a pixel in the fractal image.
+     * Computes the color of a pixel in the fractal image.
      *
      * @param row The row of the pixel.
      * @param column The column of the pixel.
+     *
+     * @return The computed color for the pixel.
      */
     @Override
     public Color computePixelColor(int row, int column) {
@@ -85,7 +95,7 @@ public class FractalGenerator implements IFractalGenerator {
     }
 
     /**
-     * Save the fractal image to a file.
+     * Saves the fractal image to a file.
      */
     @Override
     public void saveImage() {

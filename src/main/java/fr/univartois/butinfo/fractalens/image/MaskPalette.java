@@ -5,6 +5,8 @@ import java.awt.Color;
 /**
  * The MaskPalette class is a decorator for a palette, which only keeps some of the
  * red, green and blue components of the colors given by the decorated palette.
+ *
+ * @author FractaLens Team
  */
 public class MaskPalette implements IPalette {
 

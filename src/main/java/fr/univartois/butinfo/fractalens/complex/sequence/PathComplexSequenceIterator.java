@@ -46,11 +46,24 @@ public class PathComplexSequenceIterator implements Iterator<IComplex> {
         this.maxIterations = maxIterations;
     }
 
+    /**
+     * Checks whether there are more terms to compute in the sequence.
+     * The iteration continues while the iteration limit is not reached and |current| &lt;= 2.
+     *
+     * @return {@code true} if the iteration has more elements; {@code false} otherwise.
+     */
     @Override
     public boolean hasNext() {
         return count < maxIterations && current.abs() <= 2;
     }
 
+    /**
+     * Computes and returns the next term in the complex sequence.
+     *
+     * @return The next complex number in the sequence.
+     *
+     * @throws NoSuchElementException If the iteration has no more elements.
+     */
     @Override
     public IComplex next() {
         if (!hasNext()) {

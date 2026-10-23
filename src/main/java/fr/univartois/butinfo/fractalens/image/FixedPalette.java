@@ -17,10 +17,6 @@ public class FixedPalette implements IPalette {
     }
 
     /**
-     * The fixed list of colors representing the color gradient steps.
-     */
-
-    /**
      * If the iteration number is less than or equal to zero, the first color is returned.
      * If it exceeds or equals the palette size, the last color is returned.
      *

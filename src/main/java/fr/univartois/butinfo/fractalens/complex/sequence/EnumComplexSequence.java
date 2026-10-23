@@ -33,12 +33,12 @@ public enum EnumComplexSequence {
     /**
      * Represents the Burning Ship sequence.
      */
-    BURNING_SHIP(false, c -> (z0, maxIterations) -> ComplexSequenceGeneral.burningShip(z0, c, maxIterations)),
+    BURNING_SHIP(false, c -> ComplexSequenceGeneral::burningShip),
 
     /**
      * Represents the Black Snowflake sequence.
      */
-    BLACK_SNOWFLAKE(false, c -> (z0, maxIterations) -> ComplexSequenceGeneral.blackSnowFlake(z0, maxIterations));
+    BLACK_SNOWFLAKE(false, c -> ComplexSequenceGeneral::blackSnowFlake);
 
     /**
      * Whether the sequence uses the constant c, and can therefore be rotated.

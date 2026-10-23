@@ -4,6 +4,10 @@ import java.awt.*;
 import java.util.List;
 
 public class PaletteCollections {
+
+    private PaletteCollections() {
+    }
+
     static java.util.List<Color> cosmicPalette = List.of(
             new Color(4, 4, 20),      // 0: Vide abyssal (presque noir)
             new Color(20, 10, 50),    // 1: Violet très sombre

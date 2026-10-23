@@ -5,9 +5,6 @@ import fr.univartois.butinfo.fractalens.complex.sequence.*;
 import fr.univartois.butinfo.fractalens.generator.*;
 import fr.univartois.butinfo.fractalens.image.*;
 
-import java.awt.*;
-import java.util.List;
-import java.util.function.BiFunction;
 
 
 public class Main {
@@ -73,7 +70,6 @@ public class Main {
     }
 
     public static void snowFlakeFractale() {
-        Complex c = new Complex(0.525, 0.90);
 
         FractalGeneratorBuilder builder = new FractalGeneratorBuilder()
                 .withCenter(new Complex(0.525, 0.90))
@@ -117,7 +113,7 @@ public class Main {
         generator.saveImage();
     }
 
-    public static void main(String[] args) {
+    public static void main() {
         firstFractaleZoom();
         firstFractaleSpin();
     }

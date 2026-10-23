@@ -27,21 +27,16 @@ public class FractalGenerator implements IFractalGenerator {
      * The path is the path to the image file.
      *
      */
-    private IFractalImage image;
-    private IComplexPlane plane;
-    private IPalette palette;
-    private BiFunction<IComplex,Integer, IComplexSequence> sequence;
-    private int maxIterations;
-    private String path;
+    private final IFractalImage image;
+    private final IComplexPlane plane;
+    private final IPalette palette;
+    private final BiFunction<IComplex,Integer, IComplexSequence> sequence;
+    private final int maxIterations;
+    private final String path;
 
     /**
      * Constructor.
      *
-     * @param plane
-     * @param palette
-     * @param sequence
-     * @param maxIterations
-     * @param path
      */
     public FractalGenerator( IComplexPlane plane, IPalette palette, BiFunction<IComplex,Integer, IComplexSequence> sequence, int maxIterations, String path) {
         this.image = new BufferedImageAdapter(800,800);
@@ -54,7 +49,7 @@ public class FractalGenerator implements IFractalGenerator {
 
     /**
      * Generate the fractal image.
-     * @return
+     * @return image
      */
     @Override
     public IFractalImage generateImage() {
@@ -68,19 +63,24 @@ public class FractalGenerator implements IFractalGenerator {
 
     /**
      * Compute the color of a pixel in the fractal image.
+     *
      * @param row The row of the pixel.
      * @param column The column of the pixel.
-     *
-     * @return
      */
     @Override
     public Color computePixelColor(int row, int column) {
         IComplex z0 = plane.asComplex(row, column);
         IComplexSequence seq = sequence.apply(z0, maxIterations);
+
         int iterations = 0;
-        for (IComplex z : seq) {
+        var iterator = seq.iterator();
+
+        // On utilise l'itérateur explicitement pour éviter d'avoir une variable "z" inutilisée
+        while (iterator.hasNext()) {
+            iterator.next();
             iterations++;
         }
+
         return palette.getColor(iterations);
     }
 

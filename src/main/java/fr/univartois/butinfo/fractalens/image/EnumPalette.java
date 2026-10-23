@@ -1,7 +1,5 @@
 package fr.univartois.butinfo.fractalens.image;
 
-import fr.univartois.butinfo.fractalens.Main;
-
 import java.awt.*;
 import java.util.function.IntFunction;
 
@@ -9,7 +7,7 @@ public enum EnumPalette {
     /**
      * Grey palette
      */
-    GREY_PALETTE(max -> new GreyPalette(max)),
+    GREY_PALETTE(GreyPalette::new),
     /**
      * Cosmic palette
      */

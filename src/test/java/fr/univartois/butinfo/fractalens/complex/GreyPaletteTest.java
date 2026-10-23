@@ -1,7 +1,6 @@
 package fr.univartois.butinfo.fractalens.complex;
 
 import fr.univartois.butinfo.fractalens.image.GreyPalette;
-import fr.univartois.butinfo.fractalens.image.GreyPalette;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -13,11 +12,11 @@ public class GreyPaletteTest {
     @Test
     void TestGreyPalette(){
         GreyPalette p = new GreyPalette(50);
-        float n=0;
-        assertEquals(new Color(n,n,n), p.getColor(50));
-        n= (float)1/2;
-        assertEquals(new Color(n,n,n), p.getColor(25));
-        n=(float)0.4;
-        assertEquals(new Color(n,n,n), p.getColor(30));
+        float n = 0f;
+        assertEquals(new Color(n, n, n), p.getColor(50));
+        n = 0.5f;
+        assertEquals(new Color(n, n, n), p.getColor(25));
+        n = 0.4f;
+        assertEquals(new Color(n, n, n), p.getColor(30));
     }
 }

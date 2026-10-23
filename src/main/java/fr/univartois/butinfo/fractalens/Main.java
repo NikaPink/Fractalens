@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.function.BiFunction;
 
 
-public class Main {
+public class Main{
 
 
 

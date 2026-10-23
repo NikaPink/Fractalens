@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * Unit tests for the {@link FixedPalette} class.
  *
  * @author Fractalens Team
- * @version 1.0
  */
 class FixedPaletteTest {
 

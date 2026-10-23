@@ -4,6 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * The TranslationComplexPlaneTest tests the translation decorator for {@link IComplexPlane}.
+ *
+ * @author FractaLens Team
+ */
 class TranslationComplexPlaneTest {
 
     /**

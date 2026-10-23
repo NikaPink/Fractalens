@@ -6,7 +6,7 @@ import fr.univartois.butinfo.fractalens.complex.IComplex;
  * The ComplexSequenceMandelbrot class represents Mandelbrot's sequence, i.e. a
  * {@link ComplexJuliaSequence} whose first term is also its constant.
  *
- * @version 0.1.0
+ * @author FractaLens Team
  */
 public class ComplexSequenceMandelbrot extends ComplexJuliaSequence {
 

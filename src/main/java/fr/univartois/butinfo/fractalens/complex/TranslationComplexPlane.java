@@ -1,6 +1,13 @@
 package fr.univartois.butinfo.fractalens.complex;
 
-public class TranslationComplexPlane implements IComplexPlane{
+/**
+ * The TranslationComplexPlane class decorates an {@link IComplexPlane} to apply
+ * a translation offset to each complex coordinate.
+ *
+ * @author FractaLens Team
+ */
+public class TranslationComplexPlane implements IComplexPlane {
+
     /** The original complex plane, decorated. */
     private final IComplexPlane plane;
 
@@ -29,5 +36,4 @@ public class TranslationComplexPlane implements IComplexPlane{
     public IComplex asComplex(int row, int column) {
         return plane.asComplex(row, column).add(translation);
     }
-
 }

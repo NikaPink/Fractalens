@@ -35,6 +35,8 @@ public class Run implements Runnable{
     private double a;
     @Option(names = {"-b", "--imaginary"}, description = "Imaginary part for z0 the sequence")
     private double b;
+    @Option(names = {"-z", "--zoom"}, description = "zoom in case of Zoom")
+    private double zoom;
     /**@Option(names = {"-cR", "--cReel"}, description = "Real part for constante of the sequence")
     private double cA;
     @Option(names = {"-cI", "--cImaginary"}, description = "Imaginary part for constante of the sequence")
@@ -51,7 +53,7 @@ public class Run implements Runnable{
                     .withOutputFile(outputFile)
                     .withSize(width,height)
                     .withZoom(scale);
-            FractalGeneratorComposite generator = builder.zoomAnimation(imageCount,scale,90);
+            FractalGeneratorComposite generator = builder.zoomAnimation(imageCount,zoom,90);
             generator.generateImage();
             generator.saveImage();
         }

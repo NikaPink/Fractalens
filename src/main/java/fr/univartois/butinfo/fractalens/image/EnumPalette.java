@@ -1,6 +1,5 @@
 package fr.univartois.butinfo.fractalens.image;
 
-import java.awt.*;
 import java.awt.Color;
 import java.util.function.IntFunction;
 

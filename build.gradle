@@ -7,7 +7,10 @@ plugins {
     id 'application'
     id 'jacoco'
     id 'java'
+<<<<<<< build.gradle
+    id 'com.gradleup.shadow' version '9.2.2'
     id 'org.sonarqube' version '7.5.0.8588'
+>>>>>>> build.gradle
 }
 
 // The version of Java used in the project.
@@ -15,6 +18,14 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(25)
     }
+}
+
+// The group of the project, used by picocli-codegen.
+group = 'fr.univartois.butinfo'
+
+// The main class of the application.
+application {
+    mainClass = 'fr.univartois.butinfo.fractalens.Run'
 }
 
 // The repositories from which dependencies should be downloaded.

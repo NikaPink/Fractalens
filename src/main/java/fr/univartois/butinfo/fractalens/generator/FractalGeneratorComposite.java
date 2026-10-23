@@ -1,8 +1,7 @@
 package fr.univartois.butinfo.fractalens.generator;
-
 import fr.univartois.butinfo.fractalens.image.IFractalImage;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import com.madgag.gif.fmsware.AnimatedGifEncoder;

@@ -7,7 +7,7 @@ import fr.univartois.butinfo.fractalens.image.*;
 
 
 
-public class Main {
+public class Main{
 
 
 

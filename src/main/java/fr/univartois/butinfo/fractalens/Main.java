@@ -5,12 +5,17 @@ import fr.univartois.butinfo.fractalens.complex.sequence.*;
 import fr.univartois.butinfo.fractalens.generator.*;
 import fr.univartois.butinfo.fractalens.image.*;
 
+import java.awt.*;
+import java.util.List;
+import java.util.function.BiFunction;
+
+
+public class Main{
 /**
  * Main application class demonstrating various fractal generation configurations and animations.
  *
  * @author FractaLens Team
  */
-public class Main {
 
     /**
      * Private constructor to prevent instantiation of utility application class.

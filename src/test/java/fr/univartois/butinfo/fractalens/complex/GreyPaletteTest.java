@@ -20,11 +20,11 @@ public class GreyPaletteTest {
     @Test
     void testGreyPalette() {
         GreyPalette p = new GreyPalette(50);
-        float n = 0;
+        float n = 0f;
         assertEquals(new Color(n, n, n), p.getColor(50));
-        n = (float) 1 / 2;
+        n = 0.5f;
         assertEquals(new Color(n, n, n), p.getColor(25));
-        n = (float) 0.4;
+        n = 0.4f;
         assertEquals(new Color(n, n, n), p.getColor(30));
     }
 }

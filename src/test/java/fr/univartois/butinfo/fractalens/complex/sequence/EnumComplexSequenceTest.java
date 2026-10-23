@@ -1,6 +1,6 @@
 package fr.univartois.butinfo.fractalens.complex.sequence;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 import org.junit.jupiter.api.Test;
 import fr.univartois.butinfo.fractalens.complex.Complex;
@@ -24,7 +24,7 @@ class EnumComplexSequenceTest {
     @Test
     void testJulia() {
         IComplexSequence seq = EnumComplexSequence.JULIA.getFunction(c).apply(z0, maxIter);
-        assertTrue(seq instanceof ComplexJuliaSequence);
+        assertInstanceOf(ComplexJuliaSequence.class, seq);
     }
 
     /**
@@ -33,7 +33,7 @@ class EnumComplexSequenceTest {
     @Test
     void testMandelbrot() {
         IComplexSequence seq = EnumComplexSequence.MANDELBROT.getFunction(c).apply(z0, maxIter);
-        assertTrue(seq instanceof ComplexSequenceMandelbrot);
+        assertInstanceOf(ComplexSequenceMandelbrot.class, seq);
     }
 
     /**
@@ -42,7 +42,7 @@ class EnumComplexSequenceTest {
     @Test
     void testTricorn() {
         IComplexSequence seq = EnumComplexSequence.TRICORN.getFunction(c).apply(z0, maxIter);
-        assertTrue(seq instanceof ComplexSequenceTricorn);
+        assertInstanceOf(ComplexSequenceTricorn.class, seq);
     }
 
     /**
@@ -51,7 +51,7 @@ class EnumComplexSequenceTest {
     @Test
     void testBurningShip() {
         IComplexSequence seq = EnumComplexSequence.BURNING_SHIP.getFunction(c).apply(z0, maxIter);
-        assertTrue(seq instanceof ComplexSequenceGeneral);
+        assertInstanceOf(ComplexSequenceGeneral.class, seq);
     }
 
     /**
@@ -60,6 +60,6 @@ class EnumComplexSequenceTest {
     @Test
     void testBlackSnowflake() {
         IComplexSequence seq = EnumComplexSequence.BLACK_SNOWFLAKE.getFunction(c).apply(z0, maxIter);
-        assertTrue(seq instanceof ComplexSequenceGeneral);
+        assertInstanceOf(ComplexSequenceGeneral.class, seq);
     }
 }

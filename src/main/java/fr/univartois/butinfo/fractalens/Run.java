@@ -42,7 +42,6 @@ public class Run implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("aaaaaaaaaaa");
         if (type.equals("Zoom")){
             FractalGeneratorBuilder builder = new FractalGeneratorBuilder()
                     .withCenter(new Complex(xCenter, yCenter))

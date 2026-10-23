@@ -1,13 +1,14 @@
-package fr.univartois.butinfo.fractalens.generator;
+package fr.univartois.butinfo.fractalens;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import fr.univartois.butinfo.fractalens.FractalGeneratorBuilder;
 import fr.univartois.butinfo.fractalens.complex.Complex;
 import fr.univartois.butinfo.fractalens.complex.IComplex;
 import fr.univartois.butinfo.fractalens.complex.sequence.IComplexSequence;
+import fr.univartois.butinfo.fractalens.generator.FractalGenerator;
+import fr.univartois.butinfo.fractalens.generator.FractalGeneratorComposite;
 import fr.univartois.butinfo.fractalens.image.IPalette;
 import java.awt.Color;
 import java.util.function.BiFunction;

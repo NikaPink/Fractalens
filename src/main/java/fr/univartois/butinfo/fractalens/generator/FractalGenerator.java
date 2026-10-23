@@ -22,33 +22,19 @@ public class FractalGenerator implements IFractalGenerator {
 
     /**
      * The image on which the fractal is drawn.
+     * The plane is the complex plane.
+     * The palette is the color palette.
+     * The sequence is the sequence of complex numbers.
+     * The maxIterations is the maximum number of iterations.
+     * The path is the path to the image file.
+     *
      */
-    private IFractalImage image;
-
-    /**
-     * The complex plane mapping pixel positions to complex values.
-     */
-    private IComplexPlane plane;
-
-    /**
-     * The color palette used for pixel coloring.
-     */
-    private IPalette palette;
-
-    /**
-     * The factory creating the complex sequence for each point.
-     */
-    private BiFunction<IComplex, Integer, IComplexSequence> sequence;
-
-    /**
-     * The maximum number of iterations allowed per sequence.
-     */
-    private int maxIterations;
-
-    /**
-     * The file path where the generated image is saved.
-     */
-    private String path;
+    private final IFractalImage image;
+    private final IComplexPlane plane;
+    private final IPalette palette;
+    private final BiFunction<IComplex,Integer, IComplexSequence> sequence;
+    private final int maxIterations;
+    private final String path;
 
     /**
      * Constructs a new FractalGenerator with the specified parameters.
@@ -95,10 +81,16 @@ public class FractalGenerator implements IFractalGenerator {
     public Color computePixelColor(int row, int column) {
         IComplex z0 = plane.asComplex(row, column);
         IComplexSequence seq = sequence.apply(z0, maxIterations);
+
         int iterations = 0;
-        for (IComplex z : seq) {
+        var iterator = seq.iterator();
+
+        // On utilise l'itérateur explicitement pour éviter d'avoir une variable "z" inutilisée
+        while (iterator.hasNext()) {
+            iterator.next();
             iterations++;
         }
+
         return palette.getColor(iterations);
     }
 

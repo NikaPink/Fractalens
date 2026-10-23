@@ -30,7 +30,7 @@ public enum EnumComplexSequence {
     /**
      * Represents the classic Mandelbrot sequence.
      */
-    MANDELBROT(false, c -> (z0, maxIterations) -> new ComplexSequenceMandelbrot(z0, maxIterations)),
+    MANDELBROT(false, c -> ComplexSequenceMandelbrot::new),
 
     /**
      * Represents the generalized Mandelbrot sequence with exponent 3.

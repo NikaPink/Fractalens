@@ -51,8 +51,6 @@ public class FractalGeneratorBuilder {
     /** The name of the output image file. */
     private String outputFile = "fractale.png";
 
-    /** The composite generator used for animations. */
-    private FractalGeneratorComposite composite;
     /**
      * Sets the dimensions of the generated image.
      *

@@ -71,7 +71,23 @@ interface IFractalGenerator {
 IFractalGenerator --> IFractalImage : << produces >>
 IFractalGenerator --> IComplexSequence : << uses >>
 ```
+---
+## How to use (CLI)
 
+### Mandatory :
+1.  **(-f/--fractal-name <name>)** : the name of the fractal to generate.
+2.  **(-n/--nb-iterations <number>)** : the number of iterations to perform.
+3.  **(-h/--height <pixels>)** : the height of the fractal image.
+4.  **(-w/--width <pixels>)** : the width of the fractal image.
+5.  **(-s/--scale <zoom>)** : the scale of the fractal.
+6.  **(-x--focus-x <number>)** : the x-coordinate of the focus point (R).
+7.  **(-y--focus-y <number>)** : the y-coordinate of the focus point (I).
+8.  **(-p/--palette-name <name>)** : the name of the color palette to use.
+9.  **(-t/--type <type>)** : the type of image to generate ("static" or "animated").
+10. **(-i/--image-count <number>)** : the number of images to generate.
+11. **(-o/--output-path <path>)** : the path where the image will be saved.
+ 
+---
 ## Feature list
 
 | Features                                               | Design Pattern(s) (?) | Author(s) |

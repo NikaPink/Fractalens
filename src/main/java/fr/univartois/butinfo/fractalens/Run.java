@@ -7,7 +7,7 @@ import fr.univartois.butinfo.fractalens.image.EnumPalette;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
 
-@CommandLine.Command(name = "fractal", mixinStandardHelpOptions = true)
+@CommandLine.Command(name = "fractalens", mixinStandardHelpOptions = true,version = "fractalens 1.6")
 public class Run implements Runnable{
     @Option(names = {"-f", "--fractal-name"}, description = "Julia,Mandlebrot,Tricorn,BurningShip")
     private EnumComplexSequence name;
@@ -42,7 +42,6 @@ public class Run implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("aaaaaaaaaaa");
         if (type.equals("Zoom")){
             FractalGeneratorBuilder builder = new FractalGeneratorBuilder()
                     .withCenter(new Complex(xCenter, yCenter))
@@ -82,10 +81,18 @@ public class Run implements Runnable{
             generator.generateImage();
             generator.saveImage();
         }
+        System.out.println("Done");
     }
 
     public static void main(String[] args) {
         new CommandLine(new Run()).execute(args);
     }
+
+    /*
+    command exemple: java -jar build/libs/fractalens-all.jar -f
+    JULIA -n 250 -h 800 -w 800 -s 0.001 -x 0 -y 0 -p AURORA_PALETTE -t
+    Unique -a 0.1 -b 0.6 -o fractal.png
+     */
+
 
 }

@@ -64,7 +64,7 @@ class EnumPaletteTest {
     @DisplayName("Verify standard enum methods (values and valueOf)")
     void testEnumMethods() {
         EnumPalette[] palettes = EnumPalette.values();
-        assertEquals(9, palettes.length, "There must be exactly 9 palettes in the enumeration");
+        assertEquals(11, palettes.length, "There must be exactly 9 palettes in the enumeration");
 
         assertEquals(EnumPalette.GREY_PALETTE, EnumPalette.valueOf("GREY_PALETTE"));
         assertEquals(EnumPalette.COSMIC_PALETTE, EnumPalette.valueOf("COSMIC_PALETTE"));

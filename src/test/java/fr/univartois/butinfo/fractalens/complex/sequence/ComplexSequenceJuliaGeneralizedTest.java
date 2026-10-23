@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  *
  * @author FractaLens Team
  */
-public class ComplexSequenceJuliaGeneralizedTest {
+class ComplexSequenceJuliaGeneralizedTest {
 
     /**
      * Helper method to create a complex number.

@@ -89,9 +89,7 @@ public class Run implements Runnable{
     }
 
     /*
-    command exemple: java -jar build/libs/fractalens-all.jar -f
-    JULIA -n 250 -h 800 -w 800 -s 0.001 -x 0 -y 0 -p AURORA_PALETTE -t
-    Unique -a 0.1 -b 0.6 -o fractal.png
+    command exemple: java -jar build/libs/fractalens-all.jar -f JULIA -n 250 -h 800 -w 800 -s 0.001 -x 0 -y 0 -p AURORA_PALETTE -t Unique -a 0.1 -b 0.6 -o fractal.png
      */
 
 

@@ -1,18 +1,9 @@
 package fr.univartois.butinfo.fractalens.generator;
-
-import fr.univartois.butinfo.fractalens.complex.IComplex;
-import fr.univartois.butinfo.fractalens.complex.IComplexPlane;
-import fr.univartois.butinfo.fractalens.complex.sequence.IComplexSequence;
-import fr.univartois.butinfo.fractalens.image.BufferedImageAdapter;
 import fr.univartois.butinfo.fractalens.image.IFractalImage;
-import fr.univartois.butinfo.fractalens.image.IPalette;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.function.BiFunction;
 import com.madgag.gif.fmsware.AnimatedGifEncoder;
 
 /**

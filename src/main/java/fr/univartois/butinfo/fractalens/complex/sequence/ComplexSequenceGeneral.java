@@ -71,13 +71,12 @@ public class ComplexSequenceGeneral implements IComplexSequence {
      * z_{n+1} = (|Re(z_n)| + i|Im(z_n)|)^2 + z_0.
      *
      * @param z0 The initial term of the sequence.
-     * @param c
      * @param maxIteration The maximum number of iterations.
      *
      * @return A new instance of ComplexSequenceGeneral configured for the
      * Burning Ship fractal.
      */
-    public static ComplexSequenceGeneral burningShip(IComplex z0, IComplex c, int maxIteration) {
+    public static ComplexSequenceGeneral burningShip(IComplex z0, int maxIteration) {
         return new ComplexSequenceGeneral(
                 z0,
                 maxIteration,
@@ -117,6 +116,17 @@ public class ComplexSequenceGeneral implements IComplexSequence {
         );
     }
 
+    /**
+     * Creates a generalized Tricorn sequence.
+     * The sequence is defined by the formula: z_{n+1} = conj(|Re(z_n)| + i|Im(z_n)|)^p + c.
+     *
+     * @param z0 The initial term of the sequence.
+     * @param c The complex constant parameter. The complex constant added at each iteration.
+     * @param maxIteration The maximum number of iterations.
+     * @param p The power exponent.
+     *
+     * @return A new instance of ComplexSequenceGeneral configured for the generalized Tricorn fractal.
+     */
     public static ComplexSequenceGeneral tricornGeneralized(IComplex z0,Complex c, int maxIteration, int p) {
         return new ComplexSequenceGeneral(
                 z0,

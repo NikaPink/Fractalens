@@ -12,7 +12,7 @@ import fr.univartois.butinfo.fractalens.complex.IComplex;
  * The ComplexSequenceMandelbrotGeneralizedTest tests the implementation of
  * {@link IComplexSequence} for the generalized Mandelbrot's sequence.
  *
- * @version 0.1.0
+
  */
 class ComplexSequenceMandelbrotGeneralizedTest {
 

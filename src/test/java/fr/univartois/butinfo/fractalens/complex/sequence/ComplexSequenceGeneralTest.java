@@ -30,7 +30,7 @@ class ComplexSequenceGeneralTest {
      * @param realPart The real part of the complex number.
      * @param imaginaryPart The imaginary part of the complex number.
      *
-     * @return The created complex number.
+     * @return They created complex number.
      */
     private static IComplex createComplex(double realPart, double imaginaryPart) {
         return new Complex(realPart, imaginaryPart);
@@ -79,8 +79,8 @@ class ComplexSequenceGeneralTest {
 
         // Calcul mathématique attendu : 
         // 1. Valeur absolue : |-2| + i|1| = 2 + 1i
-        // 2. Puissance 2   : (2 + 1i)^2 = 4 + 4i - 1 = 3 + 4i
-        // 3. Ajout de c    : (3 + 4i) + (-0.5 + 0.2i) = 2.5 + 4.2i
+        // 2. Puissance 2 : (2 + 1i)^2 = 4 + 4i - 1 = 3 + 4i
+        // 3. Ajout de c : (3 + 4i) + (-0.5 + 0.2i) = 2.5 + 4.2i
         IComplex next = sequence.computeNext(previous);
 
         assertEquals(2.5, next.getRealPart(), 0.001);
@@ -181,9 +181,8 @@ class ComplexSequenceGeneralTest {
     @Test
     void testBurningShipStaticMethod() {
         IComplex z0 = createComplex(0.1, 0.1);
-        Complex c = new Complex(0, 0); // Paramètre c présent dans la signature mais la formule utilise z0
 
-        ComplexSequenceGeneral sequence = ComplexSequenceGeneral.burningShip(z0, c, 50);
+        ComplexSequenceGeneral sequence = ComplexSequenceGeneral.burningShip(z0, 50);
 
         // prev = -2 + 3i
         // 1. Valeur absolue : |-2| + i|3| = 2 + 3i

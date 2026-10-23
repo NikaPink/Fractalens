@@ -15,6 +15,8 @@ import java.util.function.BiFunction;
 /**
  * The FractalGenerator class implements the IFractalGenerator interface and provides
  * methods for generating and saving fractal images.
+ *
+ * @author FractaLens Team
  */
 public class FractalGenerator implements IFractalGenerator {
 
@@ -27,24 +29,24 @@ public class FractalGenerator implements IFractalGenerator {
      * The path is the path to the image file.
      *
      */
-    private IFractalImage image;
-    private IComplexPlane plane;
-    private IPalette palette;
-    private BiFunction<IComplex,Integer, IComplexSequence> sequence;
-    private int maxIterations;
-    private String path;
+    private final IFractalImage image;
+    private final IComplexPlane plane;
+    private final IPalette palette;
+    private final BiFunction<IComplex,Integer, IComplexSequence> sequence;
+    private final int maxIterations;
+    private final String path;
 
     /**
-     * Constructor.
+     * Constructs a new FractalGenerator with the specified parameters.
      *
-     * @param plane
-     * @param palette
-     * @param sequence
-     * @param maxIterations
-     * @param path
+     * @param plane The complex plane to use.
+     * @param palette The color palette.
+     * @param sequence The sequence factory function.
+     * @param maxIterations The maximum number of iterations.
+     * @param path The file path for the output image.
      */
-    public FractalGenerator( IComplexPlane plane, IPalette palette, BiFunction<IComplex,Integer, IComplexSequence> sequence, int maxIterations, String path) {
-        this.image = new BufferedImageAdapter(800,800);
+    public FractalGenerator(IComplexPlane plane, IPalette palette, BiFunction<IComplex, Integer, IComplexSequence> sequence, int maxIterations, String path) {
+        this.image = new BufferedImageAdapter(800, 800);
         this.plane = plane;
         this.palette = palette;
         this.sequence = sequence;
@@ -53,8 +55,9 @@ public class FractalGenerator implements IFractalGenerator {
     }
 
     /**
-     * Generate the fractal image.
-     * @return
+     * Generates the fractal image by computing the color for each pixel.
+     *
+     * @return The generated fractal image.
      */
     @Override
     public IFractalImage generateImage() {
@@ -67,25 +70,32 @@ public class FractalGenerator implements IFractalGenerator {
     }
 
     /**
-     * Compute the color of a pixel in the fractal image.
+     * Computes the color of a pixel in the fractal image.
+     *
      * @param row The row of the pixel.
      * @param column The column of the pixel.
      *
-     * @return
+     * @return The computed color for the pixel.
      */
     @Override
     public Color computePixelColor(int row, int column) {
         IComplex z0 = plane.asComplex(row, column);
         IComplexSequence seq = sequence.apply(z0, maxIterations);
+
         int iterations = 0;
-        for (IComplex z : seq) {
+        var iterator = seq.iterator();
+
+        // On utilise l'itérateur explicitement pour éviter d'avoir une variable "z" inutilisée
+        while (iterator.hasNext()) {
+            iterator.next();
             iterations++;
         }
+
         return palette.getColor(iterations);
     }
 
     /**
-     * Save the fractal image to a file.
+     * Saves the fractal image to a file.
      */
     @Override
     public void saveImage() {

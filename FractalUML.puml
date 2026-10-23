@@ -1,0 +1,326 @@
+@startuml
+class fr.univartois.butinfo.fractalens.complex.sequence.PathComplexSequenceIterator {
+- IComplexSequence sequence
+- int maxIterations
+- IComplex current
+- int count
++ <<Create>> PathComplexSequenceIterator(IComplexSequence,int,IComplex)
++ boolean hasNext()
++ IComplex next()
+}
+
+
+interface fr.univartois.butinfo.fractalens.generator.IFractalGenerator {
+~ IFractalImage generateImage()
+~ Color computePixelColor(int,int)
+~ void saveImage()
+}
+
+class fr.univartois.butinfo.fractalens.complex.sequence.ComplexJuliaSequence {
+- IComplex c
+- IComplex z0
+- int max
++ <<Create>> ComplexJuliaSequence(IComplex,IComplex,int)
++ IComplex computeNext(IComplex)
++ Iterator<IComplex> iterator()
+}
+
+
+interface fr.univartois.butinfo.fractalens.complex.sequence.IComplexSequence {
+~ IComplex computeNext(IComplex)
+}
+
+class fr.univartois.butinfo.fractalens.image.ComplementaryColor {
+- IPalette palette
++ <<Create>> ComplementaryColor(IPalette)
++ Color getColor(int)
+}
+
+
+enum fr.univartois.butinfo.fractalens.complex.sequence.EnumComplexSequence {
++  JULIA
++  JULIA_GENERALIZED_3
++  JULIA_GENERALIZED_5
++  MANDELBROT
++  MANDELBROT_GENERALIZED_3
++  MANDELBROT_GENERALIZED_5
++  TRICORN
++  BURNING_SHIP
++  BLACK_SNOWFLAKE
+- boolean rotatable
+- Function<IComplex,BiFunction<IComplex,Integer,IComplexSequence>> factory
+~ <<Create>> EnumComplexSequence(boolean,Function<IComplex,BiFunction<IComplex,Integer,IComplexSequence>>)
++ boolean isRotatable()
++ BiFunction<IComplex,Integer,IComplexSequence> getFunction(IComplex)
+}
+
+
+class fr.univartois.butinfo.fractalens.image.GradientPalette {
+- Color c1
+- Color c2
+- int maxIteration
++ <<Create>> GradientPalette(Color,Color,int)
++ Color getColor(int)
+}
+
+
+class fr.univartois.butinfo.fractalens.complex.sequence.ComplexSequenceMandelbrot {
++ <<Create>> ComplexSequenceMandelbrot(IComplex,int)
+}
+
+class fr.univartois.butinfo.fractalens.generator.FractalGeneratorComposite {
+- int delay
+- String outputPath
+- List<IFractalImage> images
+- List<IFractalGenerator> generators
++ <<Create>> FractalGeneratorComposite(int,String)
++ void addGenerator(IFractalGenerator)
++ IFractalImage generateImage()
++ Color computePixelColor(int,int)
++ void saveImage()
++ List<IFractalGenerator> getGenerators()
+}
+
+
+class fr.univartois.butinfo.fractalens.complex.ZoomableComplexPlane {
+- IComplexPlane plane
+- double zoomFactor
++ <<Create>> ZoomableComplexPlane(IComplexPlane,double)
++ IComplex asComplex(int,int)
+}
+
+
+class fr.univartois.butinfo.fractalens.complex.sequence.ComplexSequenceGeneral {
+- IComplex z0
+- int max
+- BinaryOperator<IComplex> formula
++ <<Create>> ComplexSequenceGeneral(IComplex,int,BinaryOperator<IComplex>)
++ IComplex computeNext(IComplex)
++ Iterator<IComplex> iterator()
++ {static} ComplexSequenceGeneral burningShip(IComplex,IComplex,int)
++ {static} ComplexSequenceGeneral burningShipGeneralized(IComplex,int,int)
++ {static} ComplexSequenceGeneral tricornGeneralized(IComplex,Complex,int,int)
++ {static} ComplexSequenceGeneral blackSnowFlake(IComplex,int)
+}
+
+
+class fr.univartois.butinfo.fractalens.complex.sequence.ComplexSequenceTricorn {
+- IComplex c
+- IComplex z0
+- int max
++ <<Create>> ComplexSequenceTricorn(IComplex,IComplex,int)
++ IComplex computeNext(IComplex)
++ Iterator<IComplex> iterator()
+}
+
+
+class fr.univartois.butinfo.fractalens.complex.TranslationComplexPlane {
+- IComplexPlane plane
+- Complex translation
++ <<Create>> TranslationComplexPlane(IComplexPlane,Complex)
++ IComplex asComplex(int,int)
+}
+
+
+interface fr.univartois.butinfo.fractalens.image.IPalette {
++ Color getColor(int)
+}
+
+class fr.univartois.butinfo.fractalens.image.BufferedImageAdapter {
+- BufferedImage image
++ <<Create>> BufferedImageAdapter(BufferedImage)
++ <<Create>> BufferedImageAdapter(int,int)
++ int getHeight()
++ int getWidth()
++ void setColor(int,int,Color)
++ void saveAs(String)
++ BufferedImage asBufferedImage()
+}
+
+
+class fr.univartois.butinfo.fractalens.complex.sequence.ComplexSequenceJuliaGeneralized {
+- IComplex c
+- IComplex z0
+- int max
+- int p
++ <<Create>> ComplexSequenceJuliaGeneralized(IComplex,IComplex,int,int)
++ IComplex computeNext(IComplex)
++ Iterator<IComplex> iterator()
+}
+
+
+class fr.univartois.butinfo.fractalens.image.PaletteCollections {
+~ {static} java.util.List<Color> cosmicPalette
+~ {static} java.util.List<Color> auroraPalette
+}
+
+class fr.univartois.butinfo.fractalens.image.MaskPalette {
+- IPalette palette
+- boolean red
+- boolean green
+- boolean blue
++ <<Create>> MaskPalette(IPalette,boolean,boolean,boolean)
++ Color getColor(int)
+}
+
+
+class fr.univartois.butinfo.fractalens.image.GreyPalette {
+- int maxIteration
++ <<Create>> GreyPalette(int)
++ Color getColor(int)
+}
+
+
+enum fr.univartois.butinfo.fractalens.image.EnumPalette {
++  GREY_PALETTE
++  COSMIC_PALETTE
++  AURORA_PALETTE
++  GRADIENT_NOIR_BLANC_PALETTE
++  GRADIENT_ROUGE_NOIR_PALETTE
++  GRADIENT_VERT_ORANGE_PALETTE
++  GRADIENT_PINK_RED_PALETTE
++  GRADIENT_GREEN_BLUE_PALETTE
++  GRADIENT_NOIR_VERT_PALETTE
+- IntFunction<IPalette> palette
+~ <<Create>> EnumPalette(IntFunction<IPalette>)
++ IPalette create(int)
+}
+
+
+interface fr.univartois.butinfo.fractalens.image.IFractalImage {
+~ int getHeight()
+~ int getWidth()
+~ void setColor(int,int,Color)
+~ void saveAs(String)
+~ BufferedImage asBufferedImage()
+}
+
+class fr.univartois.butinfo.fractalens.complex.Complex {
+- double real
+- double imaginary
++ <<Create>> Complex(double,double)
++ double getRealPart()
++ double getImaginaryPart()
++ double abs()
++ IComplex negate()
++ IComplex conjugate()
++ IComplex add(IComplex)
++ IComplex subtract(IComplex)
++ IComplex multiply(double)
++ IComplex multiply(IComplex)
++ IComplex divide(IComplex)
++ String toString()
++ boolean equals(Object)
++ int hashCode()
++ IComplex pow(int)
+}
+
+
+interface fr.univartois.butinfo.fractalens.complex.IComplex {
+~ double getRealPart()
+~ double getImaginaryPart()
+~ double abs()
+~ IComplex negate()
+~ IComplex conjugate()
+~ IComplex add(IComplex)
+~ IComplex subtract(IComplex)
+~ IComplex multiply(double)
+~ IComplex multiply(IComplex)
+~ IComplex divide(IComplex)
+~ IComplex pow(int)
+}
+
+interface fr.univartois.butinfo.fractalens.complex.IComplexPlane {
+~ IComplex asComplex(int,int)
+}
+
+class fr.univartois.butinfo.fractalens.image.FixedPalette {
+- List<Color> colors
++ <<Create>> FixedPalette(List<Color>)
++ Color getColor(int)
+}
+
+
+class fr.univartois.butinfo.fractalens.complex.ComplexPlane {
+- int width
+- int height
++ <<Create>> ComplexPlane(int,int)
++ IComplex asComplex(int,int)
+}
+
+
+class fr.univartois.butinfo.fractalens.generator.FractalGenerator {
+- IFractalImage image
+- IComplexPlane plane
+- IPalette palette
+- BiFunction<IComplex,Integer,IComplexSequence> sequence
+- int maxIterations
+- String path
++ <<Create>> FractalGenerator(IComplexPlane,IPalette,BiFunction<IComplex,Integer,IComplexSequence>,int,String)
++ IFractalImage generateImage()
++ Color computePixelColor(int,int)
++ void saveImage()
+}
+
+
+class fr.univartois.butinfo.fractalens.complex.sequence.ComplexSequenceMandelbrotGeneralized {
++ <<Create>> ComplexSequenceMandelbrotGeneralized(IComplex,int,int)
+}
+
+class fr.univartois.butinfo.fractalens.Main {
++ {static} void firstFractale()
++ {static} void secondFractale()
++ {static} void mandelbrotFractale()
++ {static} void burningShipFractale()
++ {static} void snowFlakeFractale()
++ {static} void firstFractaleZoom()
++ {static} void firstFractaleSpin()
++ {static} void main(String[])
+}
+
+class fr.univartois.butinfo.fractalens.FractalGeneratorBuilder {
+- int width
+- int height
+- double zoom
+- Complex center
+- int maxIterations
+- IPalette palette
+- BiFunction<IComplex,Integer,IComplexSequence> sequenceFactory
+- String outputFile
+- FractalGeneratorComposite composite
++ FractalGeneratorBuilder withSize(int,int)
++ FractalGeneratorBuilder withZoom(double)
++ FractalGeneratorBuilder withCenter(Complex)
++ FractalGeneratorBuilder withMaxIterations(int)
++ FractalGeneratorBuilder withPalette(IPalette)
++ FractalGeneratorBuilder withSequenceFactory(BiFunction<IComplex,Integer,IComplexSequence>)
++ FractalGeneratorBuilder withOutputFile(String)
++ FractalGenerator build()
++ FractalGeneratorComposite zoomAnimation(int,double,int)
++ FractalGeneratorComposite buildSpin(EnumComplexSequence,IComplex,int,int,String)
+}
+
+
+
+
+java.util.Iterator <|.. fr.univartois.butinfo.fractalens.complex.sequence.PathComplexSequenceIterator
+fr.univartois.butinfo.fractalens.complex.sequence.IComplexSequence <|.. fr.univartois.butinfo.fractalens.complex.sequence.ComplexJuliaSequence
+fr.univartois.butinfo.fractalens.complex.sequence.Iterable <|-- fr.univartois.butinfo.fractalens.complex.sequence.IComplexSequence
+fr.univartois.butinfo.fractalens.image.IPalette <|.. fr.univartois.butinfo.fractalens.image.ComplementaryColor
+fr.univartois.butinfo.fractalens.image.IPalette <|.. fr.univartois.butinfo.fractalens.image.GradientPalette
+fr.univartois.butinfo.fractalens.complex.sequence.ComplexJuliaSequence <|-- fr.univartois.butinfo.fractalens.complex.sequence.ComplexSequenceMandelbrot
+fr.univartois.butinfo.fractalens.generator.IFractalGenerator <|.. fr.univartois.butinfo.fractalens.generator.FractalGeneratorComposite
+fr.univartois.butinfo.fractalens.complex.IComplexPlane <|.. fr.univartois.butinfo.fractalens.complex.ZoomableComplexPlane
+fr.univartois.butinfo.fractalens.complex.sequence.IComplexSequence <|.. fr.univartois.butinfo.fractalens.complex.sequence.ComplexSequenceGeneral
+fr.univartois.butinfo.fractalens.complex.sequence.IComplexSequence <|.. fr.univartois.butinfo.fractalens.complex.sequence.ComplexSequenceTricorn
+fr.univartois.butinfo.fractalens.complex.IComplexPlane <|.. fr.univartois.butinfo.fractalens.complex.TranslationComplexPlane
+fr.univartois.butinfo.fractalens.image.IFractalImage <|.. fr.univartois.butinfo.fractalens.image.BufferedImageAdapter
+fr.univartois.butinfo.fractalens.complex.sequence.IComplexSequence <|.. fr.univartois.butinfo.fractalens.complex.sequence.ComplexSequenceJuliaGeneralized
+fr.univartois.butinfo.fractalens.image.IPalette <|.. fr.univartois.butinfo.fractalens.image.MaskPalette
+fr.univartois.butinfo.fractalens.image.IPalette <|.. fr.univartois.butinfo.fractalens.image.GreyPalette
+fr.univartois.butinfo.fractalens.complex.IComplex <|.. fr.univartois.butinfo.fractalens.complex.Complex
+fr.univartois.butinfo.fractalens.image.IPalette <|.. fr.univartois.butinfo.fractalens.image.FixedPalette
+fr.univartois.butinfo.fractalens.complex.IComplexPlane <|.. fr.univartois.butinfo.fractalens.complex.ComplexPlane
+fr.univartois.butinfo.fractalens.generator.IFractalGenerator <|.. fr.univartois.butinfo.fractalens.generator.FractalGenerator
+fr.univartois.butinfo.fractalens.complex.sequence.ComplexSequenceJuliaGeneralized <|-- fr.univartois.butinfo.fractalens.complex.sequence.ComplexSequenceMandelbrotGeneralized
+@enduml

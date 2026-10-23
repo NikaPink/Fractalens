@@ -6,6 +6,11 @@ import java.awt.Color;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests for {@link MaskPalette}.
+ *
+ * @author FractaLens Team
+ */
 class MaskPaletteTest {
 
     /**

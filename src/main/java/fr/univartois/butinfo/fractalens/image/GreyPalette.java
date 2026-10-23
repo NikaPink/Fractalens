@@ -1,21 +1,39 @@
 package fr.univartois.butinfo.fractalens.image;
 
-import java.awt.*;
+import java.awt.Color;
 
-public class GreyPalette implements IPalette{
-    private int maxIteration;
+/**
+ * The GreyPalette class creates shades of grey based on the ratio between the pixel's iteration count
+ * and the maximum number of iterations.
+ *
+ * @author FractaLens Team
+ */
+public class GreyPalette implements IPalette {
 
-    public GreyPalette(int maxIteration){
-        this.maxIteration=maxIteration;
-    }
-    @Override
     /**
-     * @param iterationNumber int number of iteration
-     *@param maxIteration int maximum number of iteration
-     * @return color gray for the pixel
-     * */
+     * The maximum number of iterations.
+     */
+    private final int maxIteration;
+
+    /**
+     * Constructs a new GreyPalette with the given maximum iteration limit.
+     *
+     * @param maxIteration The maximum number of iterations.
+     */
+    public GreyPalette(int maxIteration) {
+        this.maxIteration = maxIteration;
+    }
+
+    /**
+     * Computes the grey color corresponding to the given iteration count.
+     *
+     * @param iterationNumber The number of iterations for the pixel.
+     *
+     * @return The grey color for the pixel.
+     */
+    @Override
     public Color getColor(int iterationNumber) {
-        float c= 1 - ((float) iterationNumber / maxIteration);//ratio
-        return new Color(c,c,c);
+        float c = 1 - ((float) iterationNumber / maxIteration);
+        return new Color(c, c, c);
     }
 }

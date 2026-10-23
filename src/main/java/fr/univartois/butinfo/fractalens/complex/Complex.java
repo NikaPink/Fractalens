@@ -2,31 +2,48 @@ package fr.univartois.butinfo.fractalens.complex;
 
 import java.util.Objects;
 
-public class Complex implements IComplex
-{
-    private double real;
-    private double imaginary;
+/**
+ * The Complex class represents an immutable complex number with real and imaginary parts.
+ * It provides standard arithmetic operations such as addition, multiplication, division, and exponentiation.
+ *
+ * @author FractaLens Team
+ */
+public class Complex implements IComplex {
 
-    public Complex(double real, double imaginary){
+    /**
+     * The real part of the complex number.
+     */
+    private final double real;
+
+    /**
+     * The imaginary part of the complex number.
+     */
+    private final double imaginary;
+
+    /**
+     * Constructs a new complex number with the specified real and imaginary parts.
+     *
+     * @param real The real part.
+     * @param imaginary The imaginary part.
+     */
+    public Complex(double real, double imaginary) {
         this.real = real;
         this.imaginary = imaginary;
     }
 
     @Override
     public double getRealPart() {
-
         return real;
     }
 
     @Override
     public double getImaginaryPart() {
-
         return imaginary;
     }
 
     @Override
     public double abs() {
-        return Math.pow((real*real)+(imaginary*imaginary),0.5);
+        return Math.pow((real * real) + (imaginary * imaginary), 0.5);
     }
 
     @Override
@@ -64,9 +81,9 @@ public class Complex implements IComplex
 
     @Override
     public IComplex divide(IComplex other) {
-        double denominator = other.getImaginaryPart()* other.getImaginaryPart() + other.getRealPart()* other.getRealPart();
+        double denominator = other.getImaginaryPart() * other.getImaginaryPart() + other.getRealPart() * other.getRealPart();
         IComplex numerator = multiply(other.conjugate());
-        return new Complex(numerator.getRealPart()/denominator, numerator.getImaginaryPart()/denominator);
+        return new Complex(numerator.getRealPart() / denominator, numerator.getImaginaryPart() / denominator);
     }
 
     @Override
@@ -96,11 +113,11 @@ public class Complex implements IComplex
         if (p == 0) {
             return new Complex(1, 0);
         }
-        if(p == 1){
+        if (p == 1) {
             return this;
         }
         IComplex c = this;
-        for(int i = 2; i <= p; i++){
+        for (int i = 2; i <= p; i++) {
             c = c.multiply(this);
         }
         return c;

@@ -7,7 +7,7 @@ import fr.univartois.butinfo.fractalens.complex.IComplex;
  * sequence, i.e. a {@link ComplexSequenceJuliaGeneralized} whose first term is also its
  * constant.
  *
- * @version 0.1.0
+ * @author FractaLens Team
  */
 public class ComplexSequenceMandelbrotGeneralized extends ComplexSequenceJuliaGeneralized {
 
@@ -15,11 +15,11 @@ public class ComplexSequenceMandelbrotGeneralized extends ComplexSequenceJuliaGe
      * Creates a new ComplexSequenceMandelbrotGeneralized.
      *
      * @param c The point of the plane, used both as the first term and the constant.
-     * @param nbmax The maximum number of terms to compute.
+     * @param maxTerms The maximum number of terms to compute.
      * @param power The power applied to the previous term.
      */
-    public ComplexSequenceMandelbrotGeneralized(IComplex c, int nbmax, int power) {
-        super(c, c, nbmax, power);
+    public ComplexSequenceMandelbrotGeneralized(IComplex c, int maxTerms, int power) {
+        super(c, c, maxTerms, power);
     }
 
 }

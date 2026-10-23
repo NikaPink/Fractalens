@@ -1,23 +1,26 @@
 package fr.univartois.butinfo.fractalens.image;
 
-import java.awt.*;
+import java.awt.Color;
 
-public class ComplementaryColor implements IPalette{
+/**
+ * The ComplementaryColor class is a decorator of {@link IPalette} that returns the
+ * complementary of the color returned by the decorated palette.
+ *
+ * @author FractaLens Team
+ */
+public class ComplementaryColor implements IPalette {
+
     /**
-     * The ComplementaryPalette class is a decorator of {@link IPalette} that returns the
-     * complementary of the color returned by the decorated palette.
+     * The decorated color palette.
      */
-
-    private IPalette palette;
-
+    private final IPalette palette;
 
     /**
-     * Constructor.
+     * Constructs a new complementary color palette.
      *
      * @param palette The color palette to decorate.
      */
-
-    public ComplementaryColor(IPalette palette){
+    public ComplementaryColor(IPalette palette) {
         this.palette = palette;
     }
 

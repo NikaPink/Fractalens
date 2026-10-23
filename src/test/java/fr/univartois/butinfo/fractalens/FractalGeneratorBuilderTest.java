@@ -96,7 +96,7 @@ class FractalGeneratorBuilderTest {
      * Test method verifying that zoomAnimation throws an exception for an invalid number of frames.
      */
     @Test
-    void testZoomAnimationInvalidNbFrames() {
+    void testZoomAnimationInvalidFrameCount() {
         FractalGeneratorBuilder builder = new FractalGeneratorBuilder();
 
         assertThrows(IllegalArgumentException.class, () -> builder.zoomAnimation(0, 0.5, 100));

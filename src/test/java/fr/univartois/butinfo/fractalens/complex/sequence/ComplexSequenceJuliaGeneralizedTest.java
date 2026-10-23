@@ -7,13 +7,37 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Unit tests for {@link ComplexSequenceJuliaGeneralized}.
+ *
+ * @author FractaLens Team
+ */
 public class ComplexSequenceJuliaGeneralizedTest {
+
+    /**
+     * Helper method to create a complex number.
+     *
+     * @param realPart The real part.
+     * @param imaginaryPart The imaginary part.
+     *
+     * @return The created complex number.
+     */
     private static IComplex createComplex(double realPart, double imaginaryPart) {
-        return new Complex(realPart,imaginaryPart);
+        return new Complex(realPart, imaginaryPart);
     }
 
-    private static IComplexSequence createJuliaGeneralizedSequence(IComplex first, IComplex constant, int nbTerms,int p) {
-        return new ComplexSequenceJuliaGeneralized(first,constant,nbTerms,p);
+    /**
+     * Helper method to create a generalized Julia sequence.
+     *
+     * @param first The initial term.
+     * @param constant The constant c.
+     * @param nbTerms The maximum number of terms.
+     * @param p The power exponent.
+     *
+     * @return The created sequence.
+     */
+    private static IComplexSequence createJuliaGeneralizedSequence(IComplex first, IComplex constant, int nbTerms, int p) {
+        return new ComplexSequenceJuliaGeneralized(first, constant, nbTerms, p);
     }
 
     /**
@@ -24,7 +48,7 @@ public class ComplexSequenceJuliaGeneralizedTest {
     void testComputeNext() {
         IComplex z0 = createComplex(2, 0);
         IComplex c = createComplex(0, 0);
-        IComplexSequence julia = createJuliaGeneralizedSequence(z0, c, 3,3);
+        IComplexSequence julia = createJuliaGeneralizedSequence(z0, c, 3, 3);
 
         IComplex z1 = createComplex(8, 0);
         assertEquals(z1, julia.computeNext(z0));
@@ -47,7 +71,7 @@ public class ComplexSequenceJuliaGeneralizedTest {
         IComplex c = createComplex(0, 0);
         int nbTerms = 50;
 
-        IComplexSequence julia = createJuliaGeneralizedSequence(z0, c, nbTerms,2);
+        IComplexSequence julia = createJuliaGeneralizedSequence(z0, c, nbTerms, 2);
         int nbIterations = 0;
 
         for (var _ : julia) {
@@ -68,7 +92,7 @@ public class ComplexSequenceJuliaGeneralizedTest {
         IComplex c = createComplex(0.5, 0.5);
         int nbTerms = 50;
 
-        IComplexSequence julia = createJuliaGeneralizedSequence(z0, c, nbTerms,2);
+        IComplexSequence julia = createJuliaGeneralizedSequence(z0, c, nbTerms, 2);
         int nbIterations = 0;
 
         for (var _ : julia) {

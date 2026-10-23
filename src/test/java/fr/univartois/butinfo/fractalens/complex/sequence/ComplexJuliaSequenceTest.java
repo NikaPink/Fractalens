@@ -47,10 +47,9 @@ class ComplexJuliaSequenceTest {
      * @param realPart The real part of the complex number.
      * @param imaginaryPart The imaginary part of the complex number.
      *
-     * @return The created complex number.
+     * @return They created complex number.
      */
     private static IComplex createComplex(double realPart, double imaginaryPart) {
-        // TODO Create here an instance of your class implementing IComplex.
         return new Complex(realPart,imaginaryPart);
     }
 
@@ -62,11 +61,10 @@ class ComplexJuliaSequenceTest {
      *        sequence.
      * @param nbTerms The maximum number of terms to compute.
      *
-     * @return The created Julia's sequence.
+     * @return They created Julia's sequence.
      */
     private static IComplexSequence createJuliaSequence(
             IComplex first, IComplex constant, int nbTerms) {
-        // TODO Create here an instance of your class implementing IComplexSequence for
         // Julia's sequence.
         return new ComplexJuliaSequence(first,constant,nbTerms);
     }

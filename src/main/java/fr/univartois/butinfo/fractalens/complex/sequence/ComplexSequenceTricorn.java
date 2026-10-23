@@ -1,11 +1,17 @@
 package fr.univartois.butinfo.fractalens.complex.sequence;
 
-import fr.univartois.butinfo.fractalens.complex.Complex;
+
 import fr.univartois.butinfo.fractalens.complex.IComplex;
 
 import java.util.Iterator;
 
-public class ComplexSequenceTricorn implements IComplexSequence  {
+/**
+ * The ComplexSequenceTricorn class represents the Tricorn (or Mandelbar) sequence,
+ * defined by the formula: z_{n+1} = conj(z_n)^2 + c.
+ *
+ * @author FractaLens Team
+ */
+public class ComplexSequenceTricorn implements IComplexSequence {
 
     /**
      * The complex constant of the sequence.
@@ -25,14 +31,14 @@ public class ComplexSequenceTricorn implements IComplexSequence  {
     /**
      * Constructs a new Tricorn sequence.
      *
-     * @param prem  The first term of the sequence (z0).
+     * @param first The first term of the sequence (z0).
      * @param c     The complex constant added at each iteration.
-     * @param nbmax The maximum number of iterations.
+     * @param maxIterations The maximum number of iterations.
      */
-    public ComplexSequenceTricorn(IComplex prem, IComplex c, int nbmax) {
+    public ComplexSequenceTricorn(IComplex first, IComplex c, int maxIterations) {
         this.c = c;
-        this.z0 = prem;
-        this.max = nbmax;
+        this.z0 = first;
+        this.max = maxIterations;
     }
 
     /**

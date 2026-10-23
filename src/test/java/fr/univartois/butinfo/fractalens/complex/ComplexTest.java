@@ -43,7 +43,7 @@ class ComplexTest {
      * @param realPart The real part of the complex number.
      * @param imaginaryPart The imaginary part of the complex number.
      *
-     * @return The created complex number.
+     * @return They created complex number.
      */
     private static IComplex createComplex(double realPart, double imaginaryPart) {
         return new Complex(realPart,imaginaryPart);
@@ -261,7 +261,7 @@ class ComplexTest {
 
     /**
      * Test method for
-     * {@link fr.univartois.butinfo.fractalens.complex.IComplex#hashCode()}.
+     * {@link fr.univartois.butinfo.fractalens.complex.Complex#hashCode()}.
      */
     @Test
     void testHashCode() {
@@ -284,7 +284,7 @@ class ComplexTest {
 
     /**
      * Test method for
-     * {@link fr.univartois.butinfo.fractalens.complex.IComplex#equals(java.lang.Object)}.
+     * {@link fr.univartois.butinfo.fractalens.complex.Complex#equals(java.lang.Object)}.
      */
     @Test
     void testEqualsObject() {
@@ -316,7 +316,7 @@ class ComplexTest {
 
     /**
      * Test method for
-     * {@link fr.univartois.butinfo.fractalens.complex.IComplex#toString()}.
+     * {@link fr.univartois.butinfo.fractalens.complex.Complex#toString()}.
      */
     @Test
     void testToString() {

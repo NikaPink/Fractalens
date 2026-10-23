@@ -7,7 +7,8 @@ plugins {
     id 'application'
     id 'jacoco'
     id 'java'
-    id 'org.sonarqube' version '3.5.0.2730'
+    id 'com.gradleup.shadow' version '9.2.2'
+    id 'org.sonarqube' version '7.5.0.8588'
 }
 
 // The version of Java used in the project.
@@ -15,6 +16,14 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(25)
     }
+}
+
+// The group of the project, used by picocli-codegen.
+group = 'fr.univartois.butinfo'
+
+// The main class of the application.
+application {
+    mainClass = 'fr.univartois.butinfo.fractalens.Run'
 }
 
 // The repositories from which dependencies should be downloaded.
@@ -28,6 +37,13 @@ dependencies {
     testImplementation libs.junit.jupiter
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation 'com.madgag:animated-gif-lib:1.4'
+    implementation 'info.picocli:picocli:4.7.7'
+    annotationProcessor 'info.picocli:picocli-codegen:4.7.7'
+}
+
+
+compileJava {
+    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
 }
 
 // The configuration of JUnit Jupiter for unit tests.
@@ -47,7 +63,14 @@ jacoco {
 // The configuration of the SonarQube static analysis.
 sonar {
     properties {
-        property("sonar.host.url", "http://sonarqube.univ-artois.fr")
-        property("sonar.projectKey", "fractalens")
+        property("sonar.host.url", "https://sonarqube.univ-artois.fr")
+        property("sonar.projectKey", "fractalensMPCD")
+        property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
     }
 }

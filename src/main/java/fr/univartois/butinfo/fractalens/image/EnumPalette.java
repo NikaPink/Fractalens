@@ -1,60 +1,85 @@
 package fr.univartois.butinfo.fractalens.image;
 
-import fr.univartois.butinfo.fractalens.Main;
-
-import java.awt.*;
+import java.awt.Color;
 import java.util.function.IntFunction;
 
+/**
+ * The EnumPalette enumeration provides predefined color palette configurations
+ * for rendering fractals.
+ *
+ * @author FractaLens Team
+ */
 public enum EnumPalette {
-    /**
-     * Grey palette
-     */
-    GREY_PALETTE(max -> new GreyPalette(max)),
-    /**
-     * Cosmic palette
-     */
-    COSMIC_PALETTE(max  -> new FixedPalette(PaletteCollections.cosmicPalette)),
 
     /**
-     * Aurora palette
+     * Grey scale palette.
      */
-    AURORA_PALETTE(max  -> new FixedPalette(PaletteCollections.auroraPalette)),
+    GREY_PALETTE(GreyPalette::new),
+
+    NEBULA_DREAM_PALETTE(max -> new FixedPalette(PaletteCollections.nebulaDreamPalette)),
+
+    EMERALD_ABYSS_PALETTE(max -> new FixedPalette(PaletteCollections.emeraldAbyssPalette)),
+
     /**
-     * Gradient palette
+     * Cosmic fixed palette.
      */
-    GRADIENT_NOIR_BLANC_PALETTE(max -> new GradientPalette( Color.white,Color.black,max)),
+    COSMIC_PALETTE(max -> new FixedPalette(PaletteCollections.cosmicPalette)),
+
     /**
-     * Gradient palette
+     * Aurora fixed palette.
      */
-    GRADIENT_ROUGE_NOIR_PALETTE(max -> new GradientPalette(Color.red, Color.black,max)),
+    AURORA_PALETTE(max -> new FixedPalette(PaletteCollections.auroraPalette)),
+
     /**
-     * Gradient palette
+     * Black and white gradient palette.
      */
-    GRADIENT_VERT_ORANGE_PALETTE(max -> new GradientPalette( Color.green,Color.orange,max)),
+    GRADIENT_BLACK_WHITE_PALETTE(max -> new GradientPalette(Color.white, Color.black, max)),
+
     /**
-     * Gradient palette
+     * Red and black gradient palette.
      */
-    GRADIENT_PINK_RED_PALETTE(max -> new GradientPalette(Color.pink, Color.red,max)),
+    GRADIENT_RED_BLACK_PALETTE(max -> new GradientPalette(Color.red, Color.black, max)),
+
     /**
-     * Gradient palette
+     * Green and orange gradient palette.
      */
-    GRADIENT_GREEN_BLUE_PALETTE(max -> new GradientPalette( Color.green,Color.blue,max)),
+    GRADIENT_GREEN_ORANGE_PALETTE(max -> new GradientPalette(Color.green, Color.orange, max)),
+
     /**
-     * Gradient palette
+     * Pink and red gradient palette.
      */
-    GRADIENT_NOIR_VERT_PALETTE(max -> new GradientPalette(Color.black, Color.green,max));
+    GRADIENT_PINK_RED_PALETTE(max -> new GradientPalette(Color.pink, Color.red, max)),
+
     /**
-     * palette
+     * Green and blue gradient palette.
      */
-    private IntFunction< IPalette> palette;
-    EnumPalette(IntFunction<IPalette> palette){
-        this.palette=palette;
+    GRADIENT_GREEN_BLUE_PALETTE(max -> new GradientPalette(Color.green, Color.blue, max)),
+
+    /**
+     * Black and green gradient palette.
+     */
+    GRADIENT_BLACK_GREEN_PALETTE(max -> new GradientPalette(Color.black, Color.green, max));
+
+    /**
+     * The factory function creating the palette for a given maximum iteration count.
+     */
+    private final IntFunction<IPalette> palette;
+
+    /**
+     * Constructs a new palette enumeration constant.
+     *
+     * @param palette The function instantiating the palette.
+     */
+    EnumPalette(IntFunction<IPalette> palette) {
+        this.palette = palette;
     }
 
     /**
-     * Create the palette
-     * @param max
-     * @return
+     * Creates the color palette instance configured with the maximum number of iterations.
+     *
+     * @param max The maximum number of iterations.
+     *
+     * @return The configured {@link IPalette} instance.
      */
     public IPalette create(int max) {
         return palette.apply(max);

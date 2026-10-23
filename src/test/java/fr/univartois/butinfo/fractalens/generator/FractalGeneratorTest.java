@@ -18,6 +18,11 @@ import fr.univartois.butinfo.fractalens.image.IPalette;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+/**
+ * Unit tests for {@link FractalGenerator}.
+ *
+ * @author FractaLens Team
+ */
 class FractalGeneratorTest {
 
     /**

@@ -25,8 +25,7 @@ package fr.univartois.butinfo.fractalens.complex;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import fr.univartois.butinfo.fractalens.complex.IComplex;
-import fr.univartois.butinfo.fractalens.complex.IComplexPlane;
+
 import org.junit.jupiter.api.Test;
 
 /**
@@ -44,10 +43,9 @@ class ComplexPlaneTest {
      * @param realPart The real part of the complex number.
      * @param imaginaryPart The imaginary part of the complex number.
      *
-     * @return The created complex number.
+     * @return They created complex number.
      */
     private static IComplex createComplex(double realPart, double imaginaryPart) {
-        // TODO Create here an instance of your class implementing IComplex.
         return new Complex(realPart,imaginaryPart);
     }
 
@@ -57,10 +55,9 @@ class ComplexPlaneTest {
      * @param height The height of the complex plane.
      * @param width The width of the complex plane.
      *
-     * @return The created complex plane.
+     * @return They created a complex plane.
      */
     private static IComplexPlane createPlane(int height, int width) {
-        // TODO Create here an instance of your class implementing IComplexPlane.
         return new ComplexPlane(height,width);
     }
 

@@ -83,7 +83,6 @@ public class Run implements Runnable{
             generator.generateImage();
             generator.saveImage();
         }
-        System.out.println("Done");
     }
 
     public static void main(String[] args) {

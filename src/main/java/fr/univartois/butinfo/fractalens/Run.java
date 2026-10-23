@@ -53,7 +53,7 @@ public class Run implements Runnable{
                     .withOutputFile(outputFile)
                     .withSize(width,height)
                     .withZoom(scale);
-            FractalGeneratorComposite generator = builder.zoomAnimation(imageCount,zoom,90);
+            FractalGeneratorComposite generator = builder.zoomAnimation(imageCount,zoom,80);
             generator.generateImage();
             generator.saveImage();
         }
@@ -66,7 +66,7 @@ public class Run implements Runnable{
                         .withOutputFile(outputFile)
                         .withSize(width,height)
                         .withZoom(scale);
-            FractalGeneratorComposite generator = builder.buildSpin(name,new Complex(a, b),imageCount,90,outputFile);
+            FractalGeneratorComposite generator = builder.buildSpin(name,new Complex(a, b),imageCount,80,outputFile);
             generator.generateImage();
                 generator.saveImage();
             }

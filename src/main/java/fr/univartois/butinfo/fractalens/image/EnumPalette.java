@@ -16,6 +16,10 @@ public enum EnumPalette {
      */
     GREY_PALETTE(GreyPalette::new),
 
+    NEBULA_DREAM_PALETTE(max -> new FixedPalette(PaletteCollections.nebulaDreamPalette)),
+
+    EMERALD_ABYSS_PALETTE(max -> new FixedPalette(PaletteCollections.emeraldAbyssPalette)),
+
     /**
      * Cosmic fixed palette.
      */

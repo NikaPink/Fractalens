@@ -86,7 +86,20 @@ IFractalGenerator --> IComplexSequence : << uses >>
 9.  **(-t/--type <type>)** : the type of image to generate ("static" or "animated").
 10. **(-i/--image-count <number>)** : the number of images to generate.
 11. **(-o/--output-path <path>)** : the path where the image will be saved.
+12. **(-a/--real <number>)** : the real part of the sequence point.
+13. **(-b/--imaginary <number>)** : the imaginary part of the sequence point.
+14. **(-z/--zoom <number>)** : the coefficient of zoom.
  
+### Exemple : 
+*static image* :
+```bash
+java -jar build/libs/fractalens-all.jar -f JULIA -n 250 -h 800 -w 800 -s 0.001 -x 0 -y 0 -p AURORA_PALETTE -t Unique -a 0.1 -b 0.6 -o fractal.png
+```
+
+*animated image* :
+```bash
+java -jar build/libs/fractalensMPCD-all.jar -f BURNING_SHIP -n 1000 -h 600 -w 600 -s 0.004 -x -1.543689012692076 -y 0 -p COSMIC_PALETTE -t Zoom -z 0.9 -i 166 -a 0 -b 0 -o burning_ship.gif
+```
 ---
 ## Feature list
 

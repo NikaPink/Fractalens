@@ -7,6 +7,12 @@ import fr.univartois.butinfo.fractalens.image.EnumPalette;
 import picocli.CommandLine;
 import picocli.CommandLine.Option;
 
+/**
+ * @author Lucille Coquerelle , Nathan Miont, Youssef Pirmiet, Leo Deruelle
+ * @version 1.6
+ *
+ * @see Option
+ */
 @CommandLine.Command(name = "fractalens", mixinStandardHelpOptions = true,version = "fractalens 1.6")
 public class Run implements Runnable{
     @Option(names = {"-f", "--fractal-name"}, description = "Julia,Mandlebrot,Tricorn,BurningShip")
@@ -31,16 +37,13 @@ public class Run implements Runnable{
     private int imageCount;
     @Option(names = {"-o", "--output"}, description = "Name of the file for the fractal")
     private String outputFile;
-    @Option(names = {"-a", "--reel"}, description = "Real part for z0 the sequence")
+    @Option(names = {"-a", "--real"}, description = "Real part for z0 the sequence")
     private double a;
     @Option(names = {"-b", "--imaginary"}, description = "Imaginary part for z0 the sequence")
     private double b;
     @Option(names = {"-z", "--zoom"}, description = "zoom in case of Zoom")
     private double zoom;
-    /**@Option(names = {"-cR", "--cReel"}, description = "Real part for constante of the sequence")
-    private double cA;
-    @Option(names = {"-cI", "--cImaginary"}, description = "Imaginary part for constante of the sequence")
-    private double cB;*/
+
 
     @Override
     public void run() {

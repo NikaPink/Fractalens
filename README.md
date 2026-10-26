@@ -61,10 +61,11 @@ class ComplexSequenceJuliaGeneralized implements IComplexSequence
 class ComplexSequenceMandelbrotGeneralized extends ComplexSequenceJuliaGeneralized
 class ComplexSequenceGeneral implements IComplexSequence
 class ComplexSequenceTricorn implements IComplexSequence
-class PathComplexSequenceIterator implements Iterator<IComplex>
+interface "Iterator<IComplex>" as IteratorOfIComplex
+class PathComplexSequenceIterator implements IteratorOfIComplex
 enum EnumComplexSequence
 
-ComplexSequenceGeneral ..> PathComplexSequenceIterator : << creates >>
+PathComplexSequenceIterator --> IComplexSequence : sequence
 IComplexSequence --> IComplex : << generates >>
 
 ' -------------- '

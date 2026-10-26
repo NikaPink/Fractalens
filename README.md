@@ -28,13 +28,23 @@ interface IComplex {
     + {abstract} multiply(value : double) : IComplex
     + {abstract} multiply(other : IComplex) : IComplex
     + {abstract} divide(other : IComplex) : IComplex
+    + {abstract} pow(p : int) : IComplex
 }
+
+class Complex implements IComplex
 
 interface IComplexPlane {
     + {abstract} asComplex(row : int, column : int) : IComplex
 }
 
-IComplexPlane --> IComplex : << creates >>
+class ComplexPlane implements IComplexPlane
+class ZoomableComplexPlane implements IComplexPlane
+class TranslationComplexPlane implements IComplexPlane
+
+ComplexPlane ..> Complex : << creates >>
+ZoomableComplexPlane o--> IComplexPlane : plane
+TranslationComplexPlane o--> IComplexPlane : plane
+TranslationComplexPlane --> Complex : translation
 
 ' ----------------- '
 ' Complex Sequences '
@@ -45,6 +55,16 @@ interface IComplexSequence extends Iterable<IComplex> {
     + {abstract} iterator() : Iterator<IComplex>
 }
 
+class ComplexJuliaSequence implements IComplexSequence
+class ComplexSequenceMandelbrot extends ComplexJuliaSequence
+class ComplexSequenceJuliaGeneralized implements IComplexSequence
+class ComplexSequenceMandelbrotGeneralized extends ComplexSequenceJuliaGeneralized
+class ComplexSequenceGeneral implements IComplexSequence
+class ComplexSequenceTricorn implements IComplexSequence
+class PathComplexSequenceIterator implements Iterator<IComplex>
+enum EnumComplexSequence
+
+ComplexSequenceGeneral ..> PathComplexSequenceIterator : << creates >>
 IComplexSequence --> IComplex : << generates >>
 
 ' -------------- '
@@ -55,8 +75,25 @@ interface IFractalImage {
     + {abstract} getHeight() : int
     + {abstract} getWidth() : int
     + {abstract} setColor(row : int, column : int, color : Color) : void
-    + {abstract} saveAs(path : String) : void
+    + {abstract} asBufferedImage() : BufferedImage
 }
+
+class BufferedImageAdapter implements IFractalImage
+
+interface IPalette {
+    + {abstract} getColor(iterationNumber : int) : Color
+}
+
+class FixedPalette implements IPalette
+class GradientPalette implements IPalette
+class GreyPalette implements IPalette
+class ComplementaryColor implements IPalette
+class MaskPalette implements IPalette
+enum EnumPalette
+
+ComplementaryColor o--> IPalette : palette
+MaskPalette o--> IPalette : palette
+EnumPalette ..> IPalette : << creates >>
 
 ' ------------------ '
 ' Fractal Generation '
@@ -68,8 +105,17 @@ interface IFractalGenerator {
     + {abstract} saveImage() : void
 }
 
-IFractalGenerator --> IFractalImage : << produces >>
-IFractalGenerator --> IComplexSequence : << uses >>
+class FractalGenerator implements IFractalGenerator
+class FractalGeneratorComposite implements IFractalGenerator
+class FractalGeneratorBuilder
+
+FractalGeneratorComposite o--> "*" IFractalGenerator : generators
+FractalGenerator --> IFractalImage : << produces >>
+FractalGenerator --> IComplexPlane : plane
+FractalGenerator --> IPalette : palette
+FractalGenerator --> IComplexSequence : << uses >>
+FractalGeneratorBuilder ..> FractalGenerator : << creates >>
+FractalGeneratorBuilder ..> FractalGeneratorComposite : << creates >>
 ```
 ---
 ## How to use (CLI)

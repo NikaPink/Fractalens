@@ -10,113 +10,103 @@ transformations.
 
 This library is composed of the following classes:
 
-```plantuml
-hide empty members
+```mermaid
+classDiagram
+    %% ---------- Complex Numbers ----------
+    class IComplex {
+        <<interface>>
+        +getRealPart() double*
+        +getImaginaryPart() double*
+        +abs() double*
+        +negate() IComplex*
+        +conjugate() IComplex*
+        +add(other: IComplex) IComplex*
+        +subtract(other: IComplex) IComplex*
+        +multiply(value: double) IComplex*
+        +multiply(other: IComplex) IComplex*
+        +divide(other: IComplex) IComplex*
+        +pow(p: int) IComplex*
+    }
+    class IComplexPlane {
+        <<interface>>
+        +asComplex(row: int, column: int) IComplex*
+    }
+    IComplex <|.. Complex
+    IComplexPlane <|.. ComplexPlane
+    IComplexPlane <|.. ZoomableComplexPlane
+    IComplexPlane <|.. TranslationComplexPlane
+    ComplexPlane ..> Complex : «creates»
+    ZoomableComplexPlane o-- IComplexPlane : plane
+    TranslationComplexPlane o-- IComplexPlane : plane
+    TranslationComplexPlane --> Complex : translation
 
-' --------------- '
-' Complex Numbers '
-' --------------- '
+    %% ---------- Complex Sequences ----------
+    class Iterable~IComplex~ {
+        <<interface>>
+    }
+    class Iterator~IComplex~ {
+        <<interface>>
+    }
+    class IComplexSequence {
+        <<interface>>
+        +computeNext(previous: IComplex) IComplex*
+        +iterator() Iterator~IComplex~*
+    }
+    class EnumComplexSequence {
+        <<enumeration>>
+    }
+    Iterable <|-- IComplexSequence
+    IComplexSequence <|.. ComplexJuliaSequence
+    ComplexJuliaSequence <|-- ComplexSequenceMandelbrot
+    IComplexSequence <|.. ComplexSequenceJuliaGeneralized
+    ComplexSequenceJuliaGeneralized <|-- ComplexSequenceMandelbrotGeneralized
+    IComplexSequence <|.. ComplexSequenceGeneral
+    IComplexSequence <|.. ComplexSequenceTricorn
+    Iterator <|.. PathComplexSequenceIterator
+    PathComplexSequenceIterator --> IComplexSequence : sequence
+    IComplexSequence --> IComplex : «generates»
 
-interface IComplex {
-    + {abstract} getRealPart() : double
-    + {abstract} getImaginaryPart() : double
-    + {abstract} abs() : double
-    + {abstract} negate() : IComplex
-    + {abstract} conjugate() : IComplex
-    + {abstract} add(other : IComplex) : IComplex
-    + {abstract} subtract(other : IComplex) : IComplex
-    + {abstract} multiply(value : double) : IComplex
-    + {abstract} multiply(other : IComplex) : IComplex
-    + {abstract} divide(other : IComplex) : IComplex
-    + {abstract} pow(p : int) : IComplex
-}
+    %% ---------- Image Handling ----------
+    class IFractalImage {
+        <<interface>>
+        +getHeight() int*
+        +getWidth() int*
+        +setColor(row: int, column: int, color: Color) void*
+        +asBufferedImage() BufferedImage*
+    }
+    class IPalette {
+        <<interface>>
+        +getColor(iterationNumber: int) Color*
+    }
+    class EnumPalette {
+        <<enumeration>>
+    }
+    IFractalImage <|.. BufferedImageAdapter
+    IPalette <|.. FixedPalette
+    IPalette <|.. GradientPalette
+    IPalette <|.. GreyPalette
+    IPalette <|.. ComplementaryColor
+    IPalette <|.. MaskPalette
+    ComplementaryColor o-- IPalette : palette
+    MaskPalette o-- IPalette : palette
+    EnumPalette ..> IPalette : «creates»
 
-class Complex implements IComplex
-
-interface IComplexPlane {
-    + {abstract} asComplex(row : int, column : int) : IComplex
-}
-
-class ComplexPlane implements IComplexPlane
-class ZoomableComplexPlane implements IComplexPlane
-class TranslationComplexPlane implements IComplexPlane
-
-ComplexPlane ..> Complex : << creates >>
-ZoomableComplexPlane o--> IComplexPlane : plane
-TranslationComplexPlane o--> IComplexPlane : plane
-TranslationComplexPlane --> Complex : translation
-
-' ----------------- '
-' Complex Sequences '
-' ----------------- '
-
-interface IComplexSequence extends Iterable<IComplex> {
-    + {abstract} computeNext(previous : IComplex) : IComplex
-    + {abstract} iterator() : Iterator<IComplex>
-}
-
-class ComplexJuliaSequence implements IComplexSequence
-class ComplexSequenceMandelbrot extends ComplexJuliaSequence
-class ComplexSequenceJuliaGeneralized implements IComplexSequence
-class ComplexSequenceMandelbrotGeneralized extends ComplexSequenceJuliaGeneralized
-class ComplexSequenceGeneral implements IComplexSequence
-class ComplexSequenceTricorn implements IComplexSequence
-interface "Iterator<IComplex>" as IteratorOfIComplex
-class PathComplexSequenceIterator implements IteratorOfIComplex
-enum EnumComplexSequence
-
-PathComplexSequenceIterator --> IComplexSequence : sequence
-IComplexSequence --> IComplex : << generates >>
-
-' -------------- '
-' Image Handling '
-' -------------- '
-
-interface IFractalImage {
-    + {abstract} getHeight() : int
-    + {abstract} getWidth() : int
-    + {abstract} setColor(row : int, column : int, color : Color) : void
-    + {abstract} asBufferedImage() : BufferedImage
-}
-
-class BufferedImageAdapter implements IFractalImage
-
-interface IPalette {
-    + {abstract} getColor(iterationNumber : int) : Color
-}
-
-class FixedPalette implements IPalette
-class GradientPalette implements IPalette
-class GreyPalette implements IPalette
-class ComplementaryColor implements IPalette
-class MaskPalette implements IPalette
-enum EnumPalette
-
-ComplementaryColor o--> IPalette : palette
-MaskPalette o--> IPalette : palette
-EnumPalette ..> IPalette : << creates >>
-
-' ------------------ '
-' Fractal Generation '
-' ------------------ '
-
-interface IFractalGenerator {
-    + {abstract} generateImage() : IFractalImage
-    + {abstract} computePixelColor(row : int, column : int) : Color
-    + {abstract} saveImage() : void
-}
-
-class FractalGenerator implements IFractalGenerator
-class FractalGeneratorComposite implements IFractalGenerator
-class FractalGeneratorBuilder
-
-FractalGeneratorComposite o--> "*" IFractalGenerator : generators
-FractalGenerator --> IFractalImage : << produces >>
-FractalGenerator --> IComplexPlane : plane
-FractalGenerator --> IPalette : palette
-FractalGenerator --> IComplexSequence : << uses >>
-FractalGeneratorBuilder ..> FractalGenerator : << creates >>
-FractalGeneratorBuilder ..> FractalGeneratorComposite : << creates >>
+    %% ---------- Fractal Generation ----------
+    class IFractalGenerator {
+        <<interface>>
+        +generateImage() IFractalImage*
+        +computePixelColor(row: int, column: int) Color*
+        +saveImage() void*
+    }
+    IFractalGenerator <|.. FractalGenerator
+    IFractalGenerator <|.. FractalGeneratorComposite
+    FractalGeneratorComposite o-- "*" IFractalGenerator : generators
+    FractalGenerator --> IFractalImage : «produces»
+    FractalGenerator --> IComplexPlane : plane
+    FractalGenerator --> IPalette : palette
+    FractalGenerator --> IComplexSequence : «uses»
+    FractalGeneratorBuilder ..> FractalGenerator : «creates»
+    FractalGeneratorBuilder ..> FractalGeneratorComposite : «creates»
 ```
 ---
 ## How to use (CLI)
